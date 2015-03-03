@@ -1,13 +1,14 @@
 Name:		proj
-Version:	4.8.0
-Release:	2%{?dist}
+Version:	4.9.1
+Release:	RC4_1%{?dist}
 Epoch:		0
 Summary:	Cartographic projection software (PROJ.4)
 
 Group:		Applications/Engineering
 License:	MIT
 URL:		http://trac.osgeo.org/proj
-Source0:	http://download.osgeo.org/%{name}/%{name}-%{version}.tar.gz
+Source0:	http://download.osgeo.org/proj/proj-4.9.1RC4.tar.gz
+#http://download.osgeo.org/%{name}/%{name}-%{version}.tar.gz
 Source1:	http://download.osgeo.org//proj/proj-datumgrid-1.5.zip
 Patch0:		proj.copyright.patch
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
@@ -120,6 +121,9 @@ rm -rf %{buildroot}
 %attr(0644,root,root) %{_datadir}/%{name}/epsg
 
 %changelog
+* Tue Mar 3 2015 Devrim GÜNDÜZ <devrim@gunduz.org> - 0:4.9.1RC4-1
+- Update to 4.9.1RC4
+
 * Thu Jul 26 2012 Devrim GÜNDÜZ <devrim@gunduz.org> - 0:4.8.0-2
 - Add --without-jni to configure, for clean build..
 

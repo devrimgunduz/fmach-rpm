@@ -121,6 +121,9 @@ rm -rf %{buildroot}
 %attr(0644,root,root) %{_datadir}/%{name}/epsg
 
 %changelog
+* Tue Mar 3 2015 Devrim GÜNDÜZ <devrim@gunduz.org> - 0:4.9.1RC4-1
+- Update to 4.9.1RC4
+
 * Thu Jul 26 2012 Devrim GÜNDÜZ <devrim@gunduz.org> - 0:4.8.0-2
 - Add --without-jni to configure, for clean build..
 
