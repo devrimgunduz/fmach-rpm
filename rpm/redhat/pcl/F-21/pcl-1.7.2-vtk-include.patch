@@ -1,0 +1,70 @@
+--- io/src/image_grabber.cpp.old	2015-02-28 08:46:26.110842272 -0500
++++ io/src/image_grabber.cpp	2015-02-28 08:47:02.034468018 -0500
+@@ -45,14 +45,14 @@
+ #include <pcl/console/time.h>
+ 
+ #ifdef PCL_BUILT_WITH_VTK
+-  #include <vtkImageReader2.h>
+-  #include <vtkImageReader2Factory.h>
+-  #include <vtkImageData.h>
+-  #include <vtkSmartPointer.h>
+-  #include <vtkTIFFReader.h>
+-  #include <vtkPNGReader.h>
+-  #include <vtkJPEGReader.h>
+-  #include <vtkPNMReader.h>
++  #include <vtk/vtkImageReader2.h>
++  #include <vtk/vtkImageReader2Factory.h>
++  #include <vtk/vtkImageData.h>
++  #include <vtk/vtkSmartPointer.h>
++  #include <vtk/vtkTIFFReader.h>
++  #include <vtk/vtkPNGReader.h>
++  #include <vtk/vtkJPEGReader.h>
++  #include <vtk/vtkPNMReader.h>
+ #endif
+ 
+ ///////////////////////////////////////////////////////////////////////////////////////////
+--- io/include/pcl/io/vtk_lib_io.h.old	2015-02-28 10:58:52.616788189 -0500
++++ io/include/pcl/io/vtk_lib_io.h	2015-02-28 10:59:30.532391534 -0500
+@@ -54,24 +54,24 @@
+ #ifdef __GNUC__
+ #pragma GCC system_header 
+ #endif
+-#include <vtkVersion.h>
+-#include <vtkSmartPointer.h>
+-#include <vtkStructuredGrid.h>
+-#include <vtkPoints.h>
+-#include <vtkPointData.h>
+-#include <vtkCellArray.h>
+-#include <vtkUnsignedCharArray.h>
+-#include <vtkFloatArray.h>
+-#include <vtkPolyDataReader.h>
+-#include <vtkPolyDataWriter.h>
+-#include <vtkPLYReader.h>
+-#include <vtkPLYWriter.h>
+-#include <vtkOBJReader.h>
+-#include <vtkSTLReader.h>
+-#include <vtkSTLWriter.h>
+-#include <vtkPNGReader.h>
+-#include <vtkImageData.h>
+-#include <vtkPolyDataNormals.h>
++#include <vtk/vtkVersion.h>
++#include <vtk/vtkSmartPointer.h>
++#include <vtk/vtkStructuredGrid.h>
++#include <vtk/vtkPoints.h>
++#include <vtk/vtkPointData.h>
++#include <vtk/vtkCellArray.h>
++#include <vtk/vtkUnsignedCharArray.h>
++#include <vtk/vtkFloatArray.h>
++#include <vtk/vtkPolyDataReader.h>
++#include <vtk/vtkPolyDataWriter.h>
++#include <vtk/vtkPLYReader.h>
++#include <vtk/vtkPLYWriter.h>
++#include <vtk/vtkOBJReader.h>
++#include <vtk/vtkSTLReader.h>
++#include <vtk/vtkSTLWriter.h>
++#include <vtk/vtkPNGReader.h>
++#include <vtk/vtkImageData.h>
++#include <vtk/vtkPolyDataNormals.h>
+ 
+ namespace pcl
+ {

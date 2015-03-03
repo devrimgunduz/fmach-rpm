@@ -1,0 +1,12 @@
+diff -up ./recognition/include/pcl/recognition/impl/hv/hv_go.hpp.metslib ./recognition/include/pcl/recognition/impl/hv/hv_go.hpp
+--- ./recognition/include/pcl/recognition/impl/hv/hv_go.hpp.metslib	2013-10-07 09:09:35.000000000 -0400
++++ ./recognition/include/pcl/recognition/impl/hv/hv_go.hpp	2013-10-26 11:12:04.422310387 -0400
+@@ -445,7 +445,7 @@ void pcl::GlobalHypothesesVerification<M
+   mets::noimprove_termination_criteria noimprove (max_iterations_);
+   mets::linear_cooling linear_cooling;
+   mets::simulated_annealing<move_manager> sa (model, best_recorder, neigh, noimprove, linear_cooling, initial_temp_, 1e-7, 2);
+-  sa.setApplyAndEvaluate(true);
++  //sa.setApplyAndEvaluate(true);
+ 
+   {
+     pcl::ScopeTime t ("SA search...");

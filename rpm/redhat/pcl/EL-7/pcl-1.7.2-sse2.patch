@@ -1,0 +1,21 @@
+diff -up ./cmake/pcl_find_sse.cmake.sse2 ./cmake/pcl_find_sse.cmake
+--- ./cmake/pcl_find_sse.cmake.sse2	2014-12-15 20:29:32.034099142 -0500
++++ ./cmake/pcl_find_sse.cmake	2014-12-15 20:33:37.162322940 -0500
+@@ -150,16 +150,8 @@ macro(PCL_CHECK_FOR_SSE)
+     set(CMAKE_REQUIRED_FLAGS)
+ 
+     if(CMAKE_COMPILER_IS_GNUCC OR CMAKE_COMPILER_IS_GNUCXX OR CMAKE_COMPILER_IS_CLANG)
+-        if(HAVE_SSE4_2_EXTENSIONS)
+-            SET(SSE_FLAGS "${SSE_FLAGS} -msse4.2 -mfpmath=sse")
+-        elseif(HAVE_SSE4_1_EXTENSIONS)
+-            SET(SSE_FLAGS "${SSE_FLAGS} -msse4.1 -mfpmath=sse")
+-        elseif(HAVE_SSE3_EXTENSIONS)
+-            SET(SSE_FLAGS "${SSE_FLAGS} -msse3 -mfpmath=sse")
+-        elseif(HAVE_SSE2_EXTENSIONS)
++        if(HAVE_SSE2_EXTENSIONS AND ${CMAKE_SYSTEM_PROCESSOR} STREQUAL "x86_64")
+             SET(SSE_FLAGS "${SSE_FLAGS} -msse2 -mfpmath=sse")
+-        elseif(HAVE_SSE_EXTENSIONS)
+-            SET(SSE_FLAGS "${SSE_FLAGS} -msse -mfpmath=sse")
+         else()
+             # Setting -ffloat-store to alleviate 32bit vs 64bit discrepancies on non-SSE
+             # platforms.

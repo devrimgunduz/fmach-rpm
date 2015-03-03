@@ -1,0 +1,62 @@
+diff -up ./cmake/Modules/FindOpenNI.cmake.fedora ./cmake/Modules/FindOpenNI.cmake
+--- ./cmake/Modules/FindOpenNI.cmake.fedora	2014-12-29 18:12:59.205739334 -0500
++++ ./cmake/Modules/FindOpenNI.cmake	2014-12-29 18:16:37.424909703 -0500
+@@ -35,9 +35,9 @@ if(NOT WIN32)
+ endif(NOT WIN32)
+ 
+ if(${CMAKE_VERSION} VERSION_LESS 2.8.2)
+-  pkg_check_modules(PC_OPENNI openni-dev)
++  pkg_check_modules(PC_OPENNI libopenni)
+ else()
+-  pkg_check_modules(PC_OPENNI QUIET openni-dev)
++  pkg_check_modules(PC_OPENNI QUIET libopenni)
+ endif()
+ 
+ set(OPENNI_DEFINITIONS ${PC_OPENNI_CFLAGS_OTHER})
+diff -up ./io/CMakeLists.txt.fedora ./io/CMakeLists.txt
+--- ./io/CMakeLists.txt.fedora	2014-12-29 18:14:25.433288473 -0500
++++ ./io/CMakeLists.txt	2014-12-29 18:15:03.963664909 -0500
+@@ -329,7 +329,7 @@ if(build)
+     set(EXT_DEPS eigen3)
+ 
+     if(OPENNI_FOUND)
+-      list(APPEND EXT_DEPS openni-dev)
++      list(APPEND EXT_DEPS libopenni)
+     endif(OPENNI_FOUND)
+     if(OPENNI2_FOUND)
+       list(APPEND EXT_DEPS openni2-dev)
+diff -up ./PCLConfig.cmake.in.fedora ./PCLConfig.cmake.in
+--- ./PCLConfig.cmake.in.fedora	2014-09-10 17:22:57.000000000 -0400
++++ ./PCLConfig.cmake.in	2014-12-29 18:14:06.106814594 -0500
+@@ -182,7 +182,7 @@ macro(find_openni)
+   endif(NOT OPENNI_ROOT AND ("@HAVE_OPENNI@" STREQUAL "ON"))
+ 
+   if(PKG_CONFIG_FOUND)
+-    pkg_check_modules(PC_OPENNI openni-dev)
++    pkg_check_modules(PC_OPENNI libopenni)
+   endif(PKG_CONFIG_FOUND)
+   find_path(OPENNI_INCLUDE_DIRS XnStatus.h
+     HINTS ${PC_OPENNI_INCLUDEDIR} ${PC_OPENNI_INCLUDE_DIRS} 
+@@ -531,8 +531,7 @@ if(WIN32 AND NOT MINGW)
+   get_filename_component(PCL_ROOT "${PCL_DIR}" PATH)
+ else(WIN32 AND NOT MINGW)
+ # PCLConfig.cmake is installed to PCL_ROOT/share/pcl-x.y
+-  get_filename_component(PCL_ROOT "${PCL_DIR}" PATH)
+-  get_filename_component(PCL_ROOT "${PCL_ROOT}" PATH)
++  set(PCL_ROOT "@CMAKE_INSTALL_PREFIX@")
+ endif(WIN32 AND NOT MINGW)
+ 
+ # check whether PCLConfig.cmake is found into a PCL installation or in a build tree
+diff -up ./pcl_config.h.in.fedora ./pcl_config.h.in
+diff -up ./visualization/CMakeLists.txt.fedora ./visualization/CMakeLists.txt
+--- ./visualization/CMakeLists.txt.fedora	2014-12-29 18:15:14.229022646 -0500
++++ ./visualization/CMakeLists.txt	2014-12-29 18:15:24.876393695 -0500
+@@ -154,7 +154,7 @@ if(build)
+ 
+     set(EXT_DEPS "")
+     if(OPENNI_FOUND)
+-      list(APPEND EXT_DEPS openni-dev)
++      list(APPEND EXT_DEPS libopenni)
+     endif(OPENNI_FOUND)
+ 	if(OPENNI2_FOUND)
+       list(APPEND EXT_DEPS openni2-dev)

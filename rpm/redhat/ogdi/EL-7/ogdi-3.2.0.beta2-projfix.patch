@@ -1,0 +1,70 @@
+diff -up ogdi-3.2.0.beta2/ogdi/datum_driver/usa/dtusa.c.projfix ogdi-3.2.0.beta2/ogdi/datum_driver/usa/dtusa.c
+--- ogdi-3.2.0.beta2/ogdi/datum_driver/usa/dtusa.c.projfix	2012-08-19 21:27:41.632952279 -0500
++++ ogdi-3.2.0.beta2/ogdi/datum_driver/usa/dtusa.c	2012-08-19 21:27:47.343951832 -0500
+@@ -124,7 +124,7 @@ int dyn_nad_init(privdata, table)
+     strcat(pathfile,"/");  
+     strcat(pathfile,table);  
+ 
+-    ptr->dtptr = nad_init(pathfile);
++    ptr->dtptr = nad_init(pj_get_default_ctx(), pathfile);
+     if (ptr->dtptr == NULL) {
+       ptr->count--;
+       return FALSE;
+diff -up ogdi-3.2.0.beta2/proj/nad2nad.c.projfix ogdi-3.2.0.beta2/proj/nad2nad.c
+--- ogdi-3.2.0.beta2/proj/nad2nad.c.projfix	2012-08-19 21:28:18.943950482 -0500
++++ ogdi-3.2.0.beta2/proj/nad2nad.c	2012-08-19 21:29:06.057949242 -0500
+@@ -74,7 +74,7 @@ set_zone(int in, struct IO_CON *io) {
+ 
+ 	if (io->hp) {
+ 		io->t83 = 1;
+-		if (!(htab = nad_init(io->hp)))
++		if (!(htab = nad_init(pj_get_default_ctx(), io->hp)))
+ 			emess(1,"hp datum file: %s, failed: %s", io->hp,
+ 				pj_strerrno(pj_errno));
+ 	}
+@@ -109,7 +109,7 @@ setup() {
+ 	if (czone) {
+ 		if (!input.hp && !output.hp && input.t83 == output.t83)
+ 			emess(1,"identical datums");
+-		if (!(ctab = nad_init(czone)))
++		if (!(ctab = nad_init(pj_get_default_ctx(), czone)))
+ 			emess(1,"datum file: %s, failed: %s", czone, pj_strerrno(pj_errno));
+ 	} else if (input.t83 != output.t83)
+ 		emess(1,"conversion region (-r) not specified");
+diff -up ogdi-3.2.0.beta2/proj/nad_init.c.projfix ogdi-3.2.0.beta2/proj/nad_init.c
+--- ogdi-3.2.0.beta2/proj/nad_init.c.projfix	2012-08-19 21:29:27.827948522 -0500
++++ ogdi-3.2.0.beta2/proj/nad_init.c	2012-08-19 21:32:24.578942144 -0500
+@@ -8,18 +8,17 @@ static const char SCCSID[]="@(#)nad_init
+ #include <errno.h>
+ extern FILE *pj_open_lib(char *, char *);
+ 	struct CTABLE *
+-nad_init(char *name) {
++nad_init(projCtx ctx, char *name) {
+ 	char fname[FILENAME_MAX+1];
+ 	struct CTABLE *ct;
+ 	FILE *fid;
+ 	size_t i;
+ 
+-	errno = pj_errno = 0;
++	ctx->last_errno = 0;
+ 	if (!(fid = pj_open_lib(name, "rb"))) {
+ 	  strcpy(fname, "nad2783/");
+ 	  strcat(fname, name);
+-	  if (!(fid = pj_open_lib(fname, "rb"))) {
+-	    pj_errno = errno;
++	  if (!(fid = pj_open_lib(ctx, fname, "rb"))) { 
+ 	    return 0;
+ 	  }
+ 	}
+diff -up ogdi-3.2.0.beta2/proj/projects.h.projfix ogdi-3.2.0.beta2/proj/projects.h
+--- ogdi-3.2.0.beta2/proj/projects.h.projfix	2012-08-19 21:32:44.054941484 -0500
++++ ogdi-3.2.0.beta2/proj/projects.h	2012-08-19 21:33:22.313939807 -0500
+@@ -210,7 +210,7 @@ int bch2bps(UV a, UV b, UV **, int, int)
+ /* nadcon related protos */
+ LP nad_interp(LP, struct CTABLE *);
+ LP nad_cvt(LP, int, struct CTABLE *);
+-struct CTABLE *nad_init(char *);
++struct CTABLE *nad_init(projCtx ctx, char *);
+ void nad_free(struct CTABLE *);
+ 
+ #endif /* end of basic projections header */
