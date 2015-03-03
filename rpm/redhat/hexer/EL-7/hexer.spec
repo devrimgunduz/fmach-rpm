@@ -8,6 +8,8 @@ Source:		https://github.com/hobu/hexer/archive/%{version}.tar.gz
 URL:		https://github.com/hobu/hexer
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildRequires:	cmake
+BuildRequires:	boost-program-options >= 1.57, boost-thread >= 1.57, boost-iostreams >= 1.57
+BuildRequires:	boost-filesystem >= 1.57, boost-system >= 1.57, boost-random >= 1.57
 
 %description
 Hexer is a LGPL C++ library that provides some classes for generating hexbin
