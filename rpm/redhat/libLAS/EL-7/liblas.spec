@@ -7,7 +7,7 @@ Group:		Applications/Libraries
 Source:		http://download.osgeo.org/%{name}/libLAS-%{version}.tar.bz2
 URL:		http://www.liblas.org/
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
-BuildRequires:	cmake, libgeotiff-devel
+BuildRequires:	cmake, libgeotiff-devel, boost-devel >= 1.57
 
 %description
 libLAS is a C/C++ library for reading and writing the very common LAS LiDAR format.
