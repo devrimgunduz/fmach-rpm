@@ -35,6 +35,7 @@ BuildRequires:  qhull-devel, libusb1-devel, gtest-devel, qtwebkit-devel, python-
 BuildRequires:  openni-devel
 %endif
 BuildRequires:	libpcap-devel
+BuildRequires:	boost-system >= 1.57, boost-filesystem >= 1.57, boost-thread >= 1.57, boost-date-time >= 1.57, boost-iostreams >= 1.57, boost-chrono >= 1.57
 
 %description
 The Point Cloud Library (or PCL) is a large scale, open project for point

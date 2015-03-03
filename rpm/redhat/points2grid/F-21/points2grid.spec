@@ -7,8 +7,9 @@ Group:		Applications/Libraries
 Source:		https://github.com/CRREL/%{name}/archive/%{version}.tar.gz
 URL:		https://github.com/CRREL/points2grid
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
-BuildRequires:	cmake libcurl-devel bzip2-devel gdal
-
+BuildRequires:	cmake libcurl-devel bzip2-devel gdal gdal-devel boost-devel >= 1.57
+BuildRequires:	gcc-c++
+Requires:	boost-iostreams >= 1.57 boost-program-options >= 1.57
 %description
 Points2Grid generates Digital Elevation Models (DEM) using a local gridding
 method. The local gridding algorithm computes grid cell elevation using a
