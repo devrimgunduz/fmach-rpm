@@ -1,18 +1,17 @@
 Name:           ogdi
 Version:        3.2.0
-Release:        0.20.beta2%{?dist}
+Release:        0.24.beta2%{?dist}
 Summary:        Open Geographic Datastore Interface
 Group:          Applications/Engineering
 License:        BSD
 URL:            http://ogdi.sourceforge.net/
-Source0:	http://netcologne.dl.sourceforge.net/project/ogdi/ogdi/3.2.0beta2/ogdi-3.2.0.beta2.tar.gz
-#Source0:        http://dl.sourceforge.net/ogdi/%{name}-%{version}.beta2.tar.gz
+Source0:        http://dl.sourceforge.net/ogdi/%{name}-%{version}.beta2.tar.gz
 Source1:        http://ogdi.sourceforge.net/ogdi.pdf
 Patch0:         ogdi-3.2.0.beta2-projfix.patch
 BuildRoot:      %{_tmppath}/%{name}-%{version}-root-%(id -u -n)
 
-BuildRequires:  unixODBC-devel zlib-devel 
-BuildRequires:  expat-devel proj-devel tcl-devel 
+BuildRequires:  unixODBC-devel zlib-devel
+BuildRequires:  expat-devel proj-devel >= 4.9.0 tcl-devel
 
 %description
 OGDI is the Open Geographic Datastore Interface. OGDI is an
@@ -29,7 +28,7 @@ Summary:        OGDI header files and documentation
 Group:          Development/Libraries
 Requires:       %{name} = %{version}-%{release}
 Requires:       pkgconfig
-Requires:       zlib-devel expat-devel proj-devel
+Requires:       zlib-devel expat-devel proj-devel >= 4.9.0
 
 %description devel
 OGDI header files and developer's documentation.
@@ -65,16 +64,16 @@ export CFG=debug # for -g
 
 # do not compile with ssp. it will trigger internal bugs (to_fix_upstream)
 OPT_FLAGS=`echo $RPM_OPT_FLAGS|sed -e 's/-Wp,-D_FORTIFY_SOURCE=2//g'`
-export CFLAGS="$OPT_FLAGS -fPIC -DPIC -DDONT_TD_VOID -DUSE_TERMIO" 
+export CFLAGS="$OPT_FLAGS -fPIC -DPIC -DDONT_TD_VOID -DUSE_TERMIO"
 %configure \
         --with-binconfigs \
         --with-expat \
         --with-proj \
-        --with-zlib 
+        --with-zlib
 
 # WARNING !!!
 # using %{?_smp_mflags} may break build
-make 
+make
 
 # build tcl interface
 make -C ogdi/tcl_interface \
@@ -179,5 +178,5 @@ rm -rf %{buildroot}
 %{_libdir}/%{name}/libecs_tcl.so
 
 %changelog
-* Tue Mar 3 2015 Devrim Gündüz <devrim@gunduz.org> - 3.2.0-0.20.beta2
-- Initial packaging for Fmach repo, based on Fedora spec file.
+* Tue Mar 3 2015 Devrim Gunduz <devrim@gunduz.org> - 3.2.0-0.24.beta2
+- Initial build for FMACH repository.
