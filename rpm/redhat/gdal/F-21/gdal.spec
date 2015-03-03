@@ -760,21 +760,7 @@ popd
 #Or as before, using ldconfig
 
 %changelog
-* Tue Nov 25 2014 Devrim Gündüz <devrimgundu<z.org> - 1.11.0-3
+* Tue Nov 25 2014 Devrim Gündüz <devrimgunduz.org> - 1.11.0-3
 - Remove mysql support.
 - Disable tests.
 
-%changelog
-* Sat Jun 07 2014 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 1.11.0-2
-- Rebuilt for https://fedoraproject.org/wiki/Fedora_21_Mass_Rebuild
-
-* Fri Apr 25 2014 Volker Fröhlich <volker27@gmx.at> - 1.11.0-1
-- New upstream release
-- Remove libgcj as BR, as it no longer exists in F21
-- Re-enable ogdi and spatialite where possible
-- Adapt Python-BR to python2-devel
-- Obsolete Ruby bindings, due to the suggestion of Even Rouault
-- Preserve timestamp of Fedora README file
-- Explicitly create HTML documentation with Doxygen
-- Make test execution conditional
-- Truncate changelog
