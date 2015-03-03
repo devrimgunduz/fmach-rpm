@@ -41,7 +41,7 @@
 
 Name:      libspatialite
 Version:   4.2.0
-Release:   3%{?dist}
+Release:   4%{?dist}
 Summary:   Enables SQLite to support spatial data
 Group:     System Environment/Libraries
 License:   MPLv1.1 or GPLv2+ or LGPLv2+
@@ -54,7 +54,7 @@ BuildRoot: %(mktemp -ud %{_tmppath}/%{name}-%{version}-%{release}-XXXXXX)
 
 BuildRequires: freexl-devel
 BuildRequires: geos-devel
-BuildRequires: proj-devel
+BuildRequires: proj-devel >= 4.9.0
 BuildRequires: sqlite-devel
 BuildRequires: zlib-devel
 
@@ -138,92 +138,7 @@ rm -rf %{buildroot}
 
 
 %changelog
-* Sun Aug 17 2014 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 4.2.0-3
-- Rebuilt for https://fedoraproject.org/wiki/Fedora_21_22_Mass_Rebuild
-
-* Tue Jul 29 2014 Volker Fröhlich <volker27@gmx.at> - 4.2.0-2
-- libxml2 default is now "yes"
-- Disable geos support for EL5, as geos 3.2 is no longer supported
-- Move the mod_spatialite symlink to the main package
-
-* Fri Jul 25 2014 Peter Robinson <pbrobinson@fedoraproject.org> 4.2.0-1
-- Update to 4.2.0
-
-* Sat Jun 07 2014 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 4.1.1-3
-- Rebuilt for https://fedoraproject.org/wiki/Fedora_21_Mass_Rebuild
-
-* Thu Jan 23 2014 Volker Fröhlich <volker27@gmx.at> - 4.1.1-2
-- Update for EPEL 7
-
-* Sat Aug 03 2013 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 4.1.1-2
-- Rebuilt for https://fedoraproject.org/wiki/Fedora_20_Mass_Rebuild
-
-* Mon Jul  1 2013 Volker Fröhlich <volker27@gmx.at> - 4.1.1-1
-- New upstram release
-
-* Thu Jun 27 2013 Volker Fröhlich <volker27@gmx.at> - 4.1.0-2
-- Temporarily disable lwgeom features to break the circular
-  dependency between gdal -- libspatialite -- postgis -- gdal
-
-* Tue Jun  4 2013 Volker Fröhlich <volker27@gmx.at> - 4.1.0-1
-- New upstream release
-
-* Mon Apr  8 2013 Volker Fröhlich <volker27@gmx.at> - 4.0.0-3
-- Disable hexgrid22 test on 32 bit systems
-- Disable tests on ARM
-
-* Thu Feb 14 2013 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 4.0.0-2
-- Rebuilt for https://fedoraproject.org/wiki/Fedora_19_Mass_Rebuild
-
-* Sat Dec  1 2012 Volker Fröhlich <volker27@gmx.at> - 4.0.0-1
-- New upstream release
-- Remove arch restrictions, solving BZ 663938 and 846301
-- Update conditional for geosadvanced
-
-* Sat Aug 18 2012 Volker Fröhlich <volker27@gmx.at> - 3.1.0-0.3.RC2
-- Add ppc to excluded archs (BZ #846301)
-- Don't build with profiling
-
-* Thu Jul 19 2012 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 3.1.0-0.2.RC2
-- Rebuilt for https://fedoraproject.org/wiki/Fedora_18_Mass_Rebuild
-
-* Fri Jan 27 2012 Volker Fröhlich <volker27@gmx.at> - 3.1.0-0.1.RC2
-- Add pkconfig as Requirement to the devel sub-package
-- Drop freexl patch (solved), build with Freexl
-- Update descriptions and summaries
-- Re-design conditionals for build flags
-- Don't run checks if built without advancedgeos
-- Include examples as documentation
-
-* Sat Jan 14 2012 Volker Fröhlich <volker27@gmx.at> - 3.0.1-1
-- New upstream release
-- Drop defattr
-- Run tests
-- Own spatialite include-dir
-- Add GPLv2+ and LGPLv2+ as alternative licenses
-- Update URL and source URL
-- Reduce build conditions to EPEL or not
-- Use isa macro in base package Requires
-
-* Fri Jan 13 2012 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 2.4.0-0.7.RC4
-- Rebuilt for https://fedoraproject.org/wiki/Fedora_17_Mass_Rebuild
-
-* Tue Feb 08 2011 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 2.4.0-0.6.RC4
-- Rebuilt for https://fedoraproject.org/wiki/Fedora_15_Mass_Rebuild
-
-* Tue Dec 7 2010 Volker Fröhlich <volker27@gmx.at> 2.4.0-0.5.RC4
-- Corrected wrong Fedora version number in if-statement
-
-* Sun Dec 5 2010 Volker Fröhlich <volker27@gmx.at> 2.4.0-0.4.RC4
-- Refined configure condition to support RHEL
-
-* Fri Dec 3 2010 Volker Fröhlich <volker27@gmx.at> 2.4.0-0.3.RC4
-- Added buildroot
-- Added doc files
-
-* Wed Dec 1 2010 Volker Fröhlich <volker27@gmx.at> 2.4.0-0.2.RC4
-- Added description of devel package
-- Switched to disable-static flag
-
-* Sun Nov 28 2010 Volker Fröhlich <volker27@gmx.at> 2.4.0-0.1.RC4
-- Initial packaging for Fedora
+* Tue Mar 3 2015 Devrim Gunduz <devrim@gunduz.org> - 4.2.0-4
+- Initial build for FMACH repo
+- Trim changelog
+- Add explicit version dependency to proj.
