@@ -32,7 +32,7 @@ for f in `find . -type f` ; do
    if file $f | grep -q ISO-8859 ; then
       set -x
       iconv -f ISO-8859-1 -t UTF-8 $f > ${f}.tmp && \
-         mv -f ${f}.tmp $f
+	mv -f ${f}.tmp $f
       set +x
    fi
    if file $f | grep -q CRLF ; then
@@ -55,12 +55,12 @@ sed -i 's| \| sed \"s\/-g \/\/\"||g' configure
 sed -i 's|LD_SHARED=@LD_SHARED@|LD_SHARED=@CC@ -shared|' Makefile.in
 
 %configure \
-        --prefix=%{_prefix} \
-        --includedir=%{_includedir}/%{name}/ \
-        --with-proj               \
-        --with-tiff               \
-        --with-jpeg               \
-        --with-zip
+	--prefix=%{_prefix} \
+	--includedir=%{_includedir}/%{name}/
+	--with-proj \
+	--with-tiff \
+	--with-jpeg \
+	--with-zip
 # WARNING
 # disable %{?_smp_mflags}
 # it breaks compile
