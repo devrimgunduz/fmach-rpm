@@ -1,39 +1,39 @@
 %global apiversion 1.7
 
-Name:           pcl
-Version:        1.7.2
-Release:        3%{?dist}
-Summary:        Library for point cloud processing
+Name:		pcl
+Version:	1.7.2
+Release:	3%{?dist}
+Summary:	Library for point cloud processing
 
-Group:          System Environment/Libraries
-License:        BSD
-URL:            http://pointclouds.org/
-Source0:        https://github.com/PointCloudLibrary/%{name}/archive/%{name}-%{version}.tar.gz
+Group:		System Environment/Libraries
+License:	BSD
+URL:		http://pointclouds.org/
+Source0:	https://github.com/PointCloudLibrary/%{name}/archive/%{name}-%{version}.tar.gz
 # Only enable sse2, and only on x86_64
-Patch0:         %{name}-1.7.2-sse2.patch
+Patch0:		%{name}-1.7.2-sse2.patch
 # Patch to compile against system metslib
-Patch1:         %{name}-1.7.2-metslib.patch
+Patch1:		%{name}-1.7.2-metslib.patch
 # Patch for PCLConfig.cmake to find pcl
-Patch2:         %{name}-1.7.2-fedora.patch
+Patch2:		%{name}-1.7.2-fedora.patch
 # Exclude the "build" directory from doxygen processing.
-Patch3:         %{name}-1.7.2-doxyfix.patch
+Patch3:		%{name}-1.7.2-doxyfix.patch
 # Pass -DBOOST_NEXT_PRIOR_HPP_INCLUDED to moc.
-Patch4:         %{name}-0ddf-boost157.patch
+Patch4:		%{name}-0ddf-boost157.patch
 # Add patch for vtk include path
 Patch5:		%{name}-1.7.2-vtk-include.patch
 Patch6:		pcl-1.7.2-vtk-includedir.patch
 
 # For plain building
-BuildRequires:  cmake, gcc-c++, boost-devel
+BuildRequires:	cmake, gcc-c++, boost-devel
 # Documentation
-BuildRequires:  doxygen, graphviz, python-sphinx
+BuildRequires:	doxygen, graphviz, python-sphinx
 
 # mandatory
-BuildRequires:  eigen3-static, flann-devel, cminpack-devel, vtk-devel, gl2ps-devel, hdf5-devel, python-devel, libxml2-devel, metslib-static, netcdf-cxx-devel, jsoncpp-devel
+BuildRequires:	eigen3-static, flann-devel, cminpack-devel, vtk-devel, gl2ps-devel, hdf5-devel, python-devel, libxml2-devel, metslib-static, netcdf-cxx-devel, jsoncpp-devel
 # optional
-BuildRequires:  qhull-devel, libusb1-devel, gtest-devel, qtwebkit-devel, python-sphinx
+BuildRequires:	qhull-devel, libusb1-devel, gtest-devel, qtwebkit-devel, python-sphinx
 %ifarch %{ix86} x86_64
-BuildRequires:  openni-devel
+BuildRequires:	openni-devel
 %endif
 BuildRequires:	libpcap-devel
 BuildRequires:	boost-system >= 1.57, boost-filesystem >= 1.57, boost-thread >= 1.57, boost-date-time >= 1.57, boost-iostreams >= 1.57, boost-chrono >= 1.57
@@ -46,39 +46,39 @@ The PCL framework contains numerous state-of-the art algorithms including
 filtering, feature estimation, surface reconstruction, registration, model
 fitting and segmentation. 
 
-%package        devel
-Summary:        Development files for %{name}
-Group:          Development/Libraries
-Requires:       %{name} = %{version}-%{release}
-Requires:       pkgconfig
-Requires:       eigen3-devel, qhull-devel, cminpack-devel, flann-devel, vtk-devel
+%package	devel
+Summary:	Development files for %{name}
+Group:		Development/Libraries
+Requires:	%{name} = %{version}-%{release}
+Requires:	pkgconfig
+Requires:	eigen3-devel, qhull-devel, cminpack-devel, flann-devel, vtk-devel
 %ifarch %{ix86} x86_64
-Requires:       openni-devel
+Requires:	openni-devel
 %endif
 
-%description    devel
+%description	devel
 The %{name}-devel package contains libraries and header files for
 developing applications that use %{name}.
 
 
-%package        tools
-Summary:        Point cloud tools and viewers
-Group:          Development/Tools
-Requires:       %{name} = %{version}-%{release}
+%package	tools
+Summary:	Point cloud tools and viewers
+Group:		Development/Tools
+Requires:	%{name} = %{version}-%{release}
 
-%description    tools
+%description	tools
 This package contains tools for point cloud file processing and viewers
 for point cloud files and live Kinect data.
 
 
-%package        doc
-Summary:        PCL API documentation
-Group:          Documentation
+%package	doc
+Summary:	PCL API documentation
+Group:		Documentation
 %if ! 0%{?rhel} || 0%{?rhel} >= 6
-BuildArch:      noarch
+BuildArch:	noarch
 %endif
 
-%description    doc
+%description	doc
 The %{name}-doc package contains API documentation for the Point Cloud
 Library.
 
@@ -112,7 +112,7 @@ pushd build
   -DOPENNI_INCLUDE_DIR:PATH=/usr/include/ni \
   -DLIB_INSTALL_DIR=%{_lib} \
 %ifarch x86_64  %{?ix86}:
-  -DPCL_ENABLE_SSE=ON \
+  DPCL_ENABLE_SSE=ON \
 %else
   -DPCL_ENABLE_SSE=OFF \
 %endif
@@ -136,7 +136,7 @@ find $RPM_BUILD_ROOT -name '*.la' -exec rm -f {} ';'
 # Just a dummy test
 rm -f $RPM_BUILD_ROOT%{_bindir}/timed_trigger_test
 
-# Remove installed documentation (will use %doc)
+# Remove installed documentation (will use %%doc)
 rm -rf $RPM_BUILD_ROOT%{_datadir}/doc
 
 # Rename the documentation folders from "html"
@@ -157,9 +157,6 @@ rm $RPM_BUILD_ROOT%{_bindir}/{openni_fast_mesh,openni_ii_normal_estimation,openn
 
 mkdir -p $RPM_BUILD_ROOT%{_libdir}/cmake/pcl
 mv $RPM_BUILD_ROOT%{_datadir}/%{name}-*/*.cmake $RPM_BUILD_ROOT%{_libdir}/cmake/pcl
-
-#%check
-#make -C build test || true
 
 %post -p /sbin/ldconfig
 
