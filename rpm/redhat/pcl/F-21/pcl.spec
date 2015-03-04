@@ -21,6 +21,7 @@ Patch3:         %{name}-1.7.2-doxyfix.patch
 Patch4:         %{name}-0ddf-boost157.patch
 # Add patch for vtk include path
 Patch5:		%{name}-1.7.2-vtk-include.patch
+Patch6:		pcl-1.7.2-vtk-includedir.patch
 
 # For plain building
 BuildRequires:  cmake, gcc-c++, boost-devel
@@ -90,6 +91,7 @@ Library.
 %patch3 -p0 -b .doxyfix
 %patch4 -p1 -b .boost157
 %patch5 -p0 -b .vtk
+%patch6 -p0 -b .vtkincludepatch
 # Just to make it obvious we're not using any of these
 rm -fr recognition/include/pcl/recognition/3rdparty/metslib
 rm -fr surface/src/3rdparty/opennurbs

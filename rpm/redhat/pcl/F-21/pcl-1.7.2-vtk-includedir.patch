@@ -1,0 +1,11 @@
+--- io/CMakeLists.txt.old	2015-03-04 01:03:09.316129934 +0000
++++ io/CMakeLists.txt	2015-03-04 01:03:41.968784907 +0000
+@@ -289,7 +289,7 @@
+ 
+     set(LIB_NAME "pcl_${SUBSYS_NAME}")
+ 
+-    include_directories("${CMAKE_CURRENT_SOURCE_DIR}/include" ${VTK_INCLUDE_DIRECTORIES})
++    include_directories("${CMAKE_CURRENT_SOURCE_DIR}/include" "/usr/include/vtk" ${VTK_INCLUDE_DIRECTORIES})
+     add_definitions(${VTK_DEFINES})
+     PCL_ADD_LIBRARY("${LIB_NAME}" "${SUBSYS_NAME}" ${srcs} ${incs} ${compression_incs} ${impl_incs} ${OPENNI_INCLUDES} ${OPENNI2_INCLUDES})
+     link_directories(${VTK_LINK_DIRECTORIES})
