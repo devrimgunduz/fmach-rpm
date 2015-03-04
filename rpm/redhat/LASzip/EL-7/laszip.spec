@@ -3,7 +3,7 @@ Name:		laszip
 Version:	2.2.0
 Release:	1%{?dist}
 License:	BSD
-Group:		Applications/Libraries
+Group:		Development/Libraries
 Source:		https://github.com/LASzip/LASzip/releases/download/v%{version}/%{name}-src-%{version}.tar.gz
 URL:		http://www.laszip.org/
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
