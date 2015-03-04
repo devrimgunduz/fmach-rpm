@@ -7,7 +7,9 @@ Group:		Applications/Libraries
 Source:		https://github.com/%{name}/%{name}/archive/%{version}.tar.gz
 URL:		http://www.pdal.io
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
-BuildRequires:	cmake boost-devel >= 1.57
+BuildRequires:	cmake boost-devel >= 1.57, eigen3-devel, flann-devel, libusb-devel
+BuildRequires:	opennni, metslib-devel, zlib-devel, libpng-devel, qhull-devel
+BuildRequires:	libpcap-devel, vtk-devel qt-devel
 
 %description
 PDAL is a BSD licensed library for translating and manipulating point cloud
