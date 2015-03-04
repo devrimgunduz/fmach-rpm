@@ -1,16 +1,16 @@
-Summary:	Nitro
+Summary:	Extensible library solution for reading and writing National Imagery Transmission Format (NITF)
 Name:		nitro
 Version:	2.7
 Release:	1%{?dist}
 License:	BSD
-Group:		Applications/Libraries
+Group:		Development/Libraries
 Source:		nitro-2.7.tar.bz2
 URL:		https://github.com/hobu/nitro
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildRequires:	cmake
 
 %description
-Nitro is a library that provides NITF support for PDAL to write LAS-in-NITF 
+Nitro is a library that provides NITF support for PDAL to write LAS-in-NITF
 files for writers.nitf.
 
 %prep
