@@ -68,3 +68,30 @@
  
  namespace pcl
  {
+--- io/include/pcl/io/impl/vtk_lib_io.hpp.old	2015-03-04 00:53:46.537076590 +0000
++++ io/include/pcl/io/impl/vtk_lib_io.hpp	2015-03-04 00:54:07.474855344 +0000
+@@ -51,15 +51,15 @@
+ #ifdef __GNUC__
+ #pragma GCC system_header
+ #endif
+-#include <vtkVersion.h>
+-#include <vtkFloatArray.h>
+-#include <vtkPointData.h>
+-#include <vtkPoints.h>
+-#include <vtkPolyData.h>
+-#include <vtkUnsignedCharArray.h>
+-#include <vtkSmartPointer.h>
+-#include <vtkStructuredGrid.h>
+-#include <vtkVertexGlyphFilter.h>
++#include <vtk/vtkVersion.h>
++#include <vtk/vtkFloatArray.h>
++#include <vtk/vtkPointData.h>
++#include <vtk/vtkPoints.h>
++#include <vtk/vtkPolyData.h>
++#include <vtk/vtkUnsignedCharArray.h>
++#include <vtk/vtkSmartPointer.h>
++#include <vtk/vtkStructuredGrid.h>
++#include <vtk/vtkVertexGlyphFilter.h>
+ 
+ ///////////////////////////////////////////////////////////////////////////////////////////
+ template <typename PointT> void
