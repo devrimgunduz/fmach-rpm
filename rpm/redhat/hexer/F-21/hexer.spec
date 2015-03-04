@@ -3,7 +3,7 @@ Name:		hexer
 Version:	1.3.0
 Release:	1%{?dist}
 License:	BSD
-Group:		Applications/Libraries
+Group:		Development/Libraries
 Source:		https://github.com/hobu/hexer/archive/%{version}.tar.gz
 URL:		https://github.com/hobu/hexer
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
@@ -49,9 +49,7 @@ rm -rf %{buildroot}
 %{_includedir}/hexer/gitsha.h
 %{_includedir}/hexer/hexer.hpp
 %{_includedir}/hexer/hexer_defines.h
-#%{_libdir}/libhexer.so
-#%{_libdir}/libhexer.so.1.0.2
-/usr/lib//libhexer.so
+/usr/lib/libhexer.so
 /usr/lib/libhexer.so.1.0.2
 
 %changelog
