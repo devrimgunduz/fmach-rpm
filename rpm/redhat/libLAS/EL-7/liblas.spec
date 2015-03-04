@@ -1,9 +1,9 @@
-Summary:	LAS 1.0/1.1/1.2 ASPRS LiDAR data translation toolse
+Summary:	LAS 1.0/1.1/1.2 ASPRS LiDAR data translation toolset
 Name:		liblas
 Version:	1.8.0
 Release:	1%{?dist}
 License:	BSD
-Group:		Applications/Libraries
+Group:		Development/Libraries
 Source:		http://download.osgeo.org/%{name}/libLAS-%{version}.tar.bz2
 URL:		http://www.liblas.org/
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
@@ -52,15 +52,11 @@ rm -rf %{buildroot}
    /usr/lib/liblas_c.so
    /usr/lib/liblas_c.so.2.3.0
    /usr/lib/liblas_c.so.3
-%{_datadir}/cmake/libLAS-1.8.0/liblas-config-version.cmake
-%{_datadir}/cmake/libLAS-1.8.0/liblas-config.cmake
-%{_datadir}/cmake/libLAS-1.8.0/liblas-depends-release.cmake
-%{_datadir}/cmake/libLAS-1.8.0/liblas-depends.cmake
-   /usr/share/liblas/doc/AUTHORS
-   /usr/share/liblas/doc/COPYING
-   /usr/share/liblas/doc/INSTALL
-   /usr/share/liblas/doc/LICENSE.txt
-   /usr/share/liblas/doc/README.txt
+%{_datadir}/cmake/libLAS-%{version}/liblas-config-version.cmake
+%{_datadir}/cmake/libLAS-%{version}/liblas-config.cmake
+%{_datadir}/cmake/libLAS-%{version}/liblas-depends-release.cmake
+%{_datadir}/cmake/libLAS-%{version}/liblas-depends.cmake
+%{_datadir}/%{name}/doc/*
 
 %changelog
 * Tue Jan 13 2015 Devrim GUNDUZ <devrim@gunduz.org> 1.3.0-1
