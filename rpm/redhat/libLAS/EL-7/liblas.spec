@@ -10,9 +10,10 @@ BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildRequires:	cmake, libgeotiff-devel, boost-devel >= 1.57 laszip
 
 %description
-libLAS is a C/C++ library for reading and writing the very common LAS LiDAR format.
-The ASPRS LAS format is a sequential binary format used to store data from LiDAR
-sensors and by LiDAR processing software for data interchange and archival.
+libLAS is a C/C++ library for reading and writing the very common LAS LiDAR
+format. The ASPRS LAS format is a sequential binary format used to store data
+from LiDAR sensors and by LiDAR processing software for data interchange and
+archival.
 
 %prep
 %setup -q -n libLAS-%{version}
