@@ -7,7 +7,7 @@ Group:		Development/Libraries
 Source:		http://download.osgeo.org/%{name}/libLAS-%{version}.tar.bz2
 URL:		http://www.liblas.org/
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
-BuildRequires:	cmake, libgeotiff-devel, boost-devel >= 1.57 laszip
+BuildRequires:	cmake, libgeotiff-devel, boost-devel >= 1.53 laszip
 
 %description
 libLAS is a C/C++ library for reading and writing the very common LAS LiDAR
@@ -19,7 +19,15 @@ archival.
 %setup -q -n libLAS-%{version}
 
 %build
-cmake -D CMAKE_INSTALL_PREFIX:PATH=/usr -D GEOTIFF_INCLUDE_DIR=%{_includedir}/libgeotiff/ .
+cmake	-DWITH_GDAL:BOOL=ON \
+	-DWITH_GEOTIFF:BOOL=ON \
+	-DGEOTIFF_INCLUDE_DIR:STRING="/usr/include/libgeotiff" \
+	-DWITH_LASZIP:BOOL=OFF \
+	-DWITH_TESTS:BOOL=OFF \
+	-DWITH_UTILITIES:BOOL=ON \
+	-DCMAKE_INSTALL_PREFIX:PATH=/usr \
+	-DLIBLAS_LIB_SUBDIR:PATH=%{_lib} \
+	-DCMAKE_BUILD_TYPE:STRING="Release" ../%{name}-%{version}/ .
 
 %install
 rm -rf %{buildroot}
@@ -47,12 +55,8 @@ rm -rf %{buildroot}
 %{_includedir}/liblas/detail/writer/*.hpp
 %{_includedir}/liblas/external/property_tree/detail/*.hpp
 %{_includedir}/liblas/external/property_tree/*.hpp
-   /usr/lib/liblas.so
-   /usr/lib/liblas.so.2.3.0
-   /usr/lib/liblas.so.3
-   /usr/lib/liblas_c.so
-   /usr/lib/liblas_c.so.2.3.0
-   /usr/lib/liblas_c.so.3
+%{_libdir}/liblas.so*
+%{_libdir}/liblas_c.so*
 %{_datadir}/cmake/libLAS-%{version}/liblas-config-version.cmake
 %{_datadir}/cmake/libLAS-%{version}/liblas-config.cmake
 %{_datadir}/cmake/libLAS-%{version}/liblas-depends-release.cmake
@@ -62,4 +66,3 @@ rm -rf %{buildroot}
 %changelog
 * Tue Jan 13 2015 Devrim GUNDUZ <devrim@gunduz.org> 1.3.0-1
 - Initial packaging
-
