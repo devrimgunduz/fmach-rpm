@@ -4,14 +4,14 @@ Version:	2.2.0
 Release:	1%{?dist}
 License:	BSD
 Group:		Development/Libraries
-Source:		https://github.com/LASzip/LASzip/releases/download/v%{version}/%{name}-src-%{version}.tar.gz
+Source0:	https://github.com/LASzip/LASzip/releases/download/v%{version}/%{name}-src-%{version}.tar.gz
 URL:		http://www.laszip.org/
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildRequires:	cmake
 
 %description
 LASzip - a free product of rapidlasso GmbH - quickly turns bulky LAS files into
-compact LAZ files without information loss. 
+compact LAZ files without information loss.
 
 %prep
 %setup -q -n %{name}-src-%{version}
