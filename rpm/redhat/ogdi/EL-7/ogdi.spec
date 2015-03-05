@@ -1,6 +1,6 @@
 Name:           ogdi
 Version:        3.2.0
-Release:        0.24.beta2%{?dist}
+Release:        0.25.beta2%{?dist}
 Summary:        Open Geographic Datastore Interface
 Group:          Applications/Engineering
 License:        BSD
@@ -178,5 +178,8 @@ rm -rf %{buildroot}
 %{_libdir}/%{name}/libecs_tcl.so
 
 %changelog
+* Thu Mar 5 2015 Devrim Gunduz <devrim@gunduz.org> - 3.2.0-0.25.beta2
+- Rebuild with Proj 4.9.1RC4
+
 * Tue Mar 3 2015 Devrim Gunduz <devrim@gunduz.org> - 3.2.0-0.24.beta2
 - Initial build for FMACH repository.
