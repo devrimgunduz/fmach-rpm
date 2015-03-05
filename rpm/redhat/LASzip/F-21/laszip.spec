@@ -2,7 +2,7 @@ Summary:	Quickly turns bulky LAS files into compant LAZ files
 Name:		laszip
 Version:	2.2.0
 Release:	1%{?dist}
-License:	BSD
+License:	GLPL
 Group:		Development/Libraries
 Source:		https://github.com/LASzip/LASzip/releases/download/v%{version}/%{name}-src-%{version}.tar.gz
 URL:		http://www.laszip.org/
