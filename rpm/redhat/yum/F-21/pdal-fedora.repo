@@ -2,7 +2,7 @@
 name=PDAL RPMs for Fedora 21 $releasever - $basearch
 baseurl=http://fmach.postgres.club/repo/fedora/fedora-$releasever-$basearch
 enabled=1
-gpgcheck=0
+gpgcheck=1
 gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-PDAL
 
 [fmach-fedora21-source]
