@@ -4,8 +4,8 @@ Release:	1
 Summary:	PDAL RPMs for Fedora - Yum Repository Configuration
 Group:		System Environment/Base
 License:	BSD
-URL:		http://fmach.postgres.club
-Source0:	http://fmach.postgres.club/RPM-GPG-KEY-PDAL
+URL:		http://pdal.s3-website-us-east-1.amazonaws.com/rpms/
+Source0:	http://pdal.s3-website-us-east-1.amazonaws.com/rpms/RPM-GPG-KEY-PDAL
 Source2:	pdal-fedora.repo
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildArch:	noarch

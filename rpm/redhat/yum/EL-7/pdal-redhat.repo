@@ -1,14 +1,14 @@
-[fmach-rhel7]
-name=PDAL RPMs for RHEL 7 $releasever - $basearch
-baseurl=http://fmach.postgres.club/repo/redhat/rhel-$releasever-$basearch
+[fmach-centos7]
+name=PDAL RPMs for CentOS 7 $releasever - $basearch
+baseurl=http://pdal.s3-website-us-east-1.amazonaws.com/rpms/repo/redhat/rhel-$releasever-$basearch
 enabled=1
 gpgcheck=1
 gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-PDAL
 
 
-[fmach-RHEL7-source]
-name=PDAL RPMs for RHEL 7 $releasever - $basearch - Source
-baseurl=http://fmach.postgres.club/repo/srpms/redhat/rhel-$releasever-$basearch
+[fmach-centos7-source]
+name=PDAL RPMs for CentOS 7 $releasever - $basearch - Source
+baseurl=http://pdal.s3-website-us-east-1.amazonaws.com/rpms/repo/srpms/redhat/rhel-$releasever-$basearch
 enabled=0
 gpgcheck=0
 gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-PDAL 
