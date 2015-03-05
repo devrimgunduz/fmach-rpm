@@ -1,6 +1,6 @@
 Name:		libgeotiff
 Version:	1.4.0
-Release:	1%{?dist}
+Release:	3%{?dist}
 Summary:	GeoTIFF format library
 Group:		System Environment/Libraries
 License:	MIT
@@ -56,11 +56,11 @@ sed -i 's|LD_SHARED=@LD_SHARED@|LD_SHARED=@CC@ -shared|' Makefile.in
 
 %configure \
 	--prefix=%{_prefix} \
-	--includedir=%{_includedir}/%{name}/
+	--includedir=%{_includedir}/%{name}/ \
 	--with-proj \
-	--with-tiff \
 	--with-jpeg \
 	--with-zip
+
 # WARNING
 # disable %{?_smp_mflags}
 # it breaks compile
@@ -118,6 +118,9 @@ echo  >> %{buildroot}%{_datadir}/epsg_csv/codes.csv
 %{_libdir}/pkgconfig/%{name}.pc
 
 %changelog
+* Thu Mar 5 2015 Devrim Gündüz <devrim@gunduz.org> - 1.4.0-3
+- Rebuild with new proj.
+
 * Sat Dec 27 2014 Devrim Gündüz <devrim@gunduz.org> - 1.4.0-1
 - Initial build for PostgreSQL YUM repository, to satisfy dependency
   for gdal (and so PostGIS). based on EPEL spec.
