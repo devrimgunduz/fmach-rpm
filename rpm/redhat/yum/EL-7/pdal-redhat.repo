@@ -1,0 +1,14 @@
+[fmach-rhel7]
+[name=PDAL RPMs for RHEL 7 $releasever - $basearch
+[baseurl=http://fmach.postgres.club/repo/redhat/rhel-$releasever-$basearch
+[enabled=1
+[gpgcheck=0
+[gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-PDAL
+
+
+[[fmach-RHEL7-source]
+[name=PDAL RPMs for RHEL 7 $releasever - $basearch - Source
+[baseurl=http://fmach.postgres.club/repo/srpms/redhat/rhel-$releasever-$basearch
+[enabled=0
+[gpgcheck=0
+[gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-PDAL 
