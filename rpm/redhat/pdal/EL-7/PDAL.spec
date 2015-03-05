@@ -7,7 +7,7 @@ Group:		Applications/Libraries
 Source:		https://github.com/%{name}/%{name}/archive/%{version}.tar.gz
 URL:		http://www.pdal.io
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
-BuildRequires:	cmake boost-devel >= 1.57
+BuildRequires:	cmake boost-devel >= 1.57, eigen3-devel, flann-devel, libusb-devel
 Requires:	proj >= 4.9.0, boost >= 1.57, gdal >= 1.11, libgeotiff >= 1.4.0
 Requires:	libxml2 >= 2.7.0, points2grid >= 1.3.0, hexer >= 1.3.0
 Requires:	nitro >= 2.7, laszip >= 2.2.0, pcl >= 1.7.2
