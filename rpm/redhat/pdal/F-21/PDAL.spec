@@ -1,7 +1,7 @@
 Summary:	Point Data Abstraction Library
 Name:		PDAL
 Version:	0.9.8
-Release:	1%{?dist}
+Release:	2%{?dist}
 License:	BSD
 Group:		Applications/Libraries
 Source:		https://github.com/%{name}/%{name}/archive/%{version}.tar.gz
@@ -70,6 +70,9 @@ rm -rf %{buildroot}
 /usr/lib/libpdal.so.0
 
 %changelog
+* Sun Mar 8 2015 Devrim GUNDUZ <devrim@gunduz.org> 0.9.8-2
+- Rebuild with new GDAL and the new build points2grid.
+
 * Tue Jan 13 2015 Devrim GUNDUZ <devrim@gunduz.org> 0.9.8-1
 - Initial packaging
 
