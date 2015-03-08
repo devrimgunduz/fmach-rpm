@@ -70,7 +70,6 @@ rm -rf %{buildroot}
 install -p -m 0644 nad/pj_out27.dist nad/pj_out83.dist nad/td_out.dist %{buildroot}%{_datadir}/%{name}
 install -p -m 0755 nad/test27 nad/test83 nad/testvarious %{buildroot}%{_datadir}/%{name}
 install -p -m 0644 nad/epsg %{buildroot}%{_datadir}/%{name}
-ln -s ./src/.libs/libproj.so.9.0.0 %{buildroot}/%{_libdir}/libproj.so.0
 
 %check
 pushd nad
@@ -87,7 +86,9 @@ popd
 %clean
 rm -rf %{buildroot}
 
-%post -p /sbin/ldconfig
+%post 
+/sbin/ldconfig
+ln -s %{_libdir}/libproj.so.9.0.0 %{_libdir}/libproj.so.0
 %postun -p /sbin/ldconfig
 
 %files
