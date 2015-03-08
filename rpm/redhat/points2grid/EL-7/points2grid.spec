@@ -1,7 +1,7 @@
 Summary:	points2grid
 Name:		points2grid
 Version:	1.3.0
-Release:	1%{?dist}
+Release:	2%{?dist}
 License:	BSD
 Group:		Applications/Libraries
 Source:		https://github.com/CRREL/%{name}/archive/%{version}.tar.gz
@@ -55,6 +55,9 @@ rm -rf %{buildroot}
  /usr/lib/libpts2grd.so
 
 %changelog
+* Sun Mar 8 2015 Devrim GUNDUZ <devrim@gunduz.org> 1.3.0-2
+- Rebuild with GDAL 1.11.2
+
 * Tue Jan 13 2015 Devrim GUNDUZ <devrim@gunduz.org> 1.3.0-1
 - Initial packaging
 
