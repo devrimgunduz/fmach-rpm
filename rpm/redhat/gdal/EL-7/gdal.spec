@@ -40,8 +40,8 @@
  
 
 Name:      gdal
-Version:   1.11.0
-Release:   3%{?dist}
+Version:   1.11.2
+Release:   10%{?dist}
 Summary:   GIS file format library
 Group:     System Environment/Libraries
 License:   MIT
@@ -760,7 +760,11 @@ popd
 #Or as before, using ldconfig
 
 %changelog
-* Tue Nov 25 2014 Devrim Gündüz <devrimgunduz.org> - 1.11.0-3
+* Sun Mar 8 2015 Devrim Gündüz <devrim@gunduz.org> - 1.11.2-10
+- Update to 1.11.2
+- Bump release number to -10, so that we can override Fedora packages.
+
+* Tue Nov 25 2014 Devrim Gündüz <devrim@gunduz.org> - 1.11.0-3
 - Remove mysql support.
 - Disable tests.
 
