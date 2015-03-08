@@ -1,14 +1,13 @@
 Name:		proj
 Version:	4.9.1
-Release:	RC4_1%{?dist}
+Release:	RC5_1%{?dist}
 Epoch:		0
 Summary:	Cartographic projection software (PROJ.4)
 
 Group:		Applications/Engineering
 License:	MIT
 URL:		http://trac.osgeo.org/proj
-Source0:	http://download.osgeo.org/proj/proj-4.9.1RC4.tar.gz
-#http://download.osgeo.org/%{name}/%{name}-%{version}.tar.gz
+Source0:	http://download.osgeo.org/proj/proj-4.9.1RC5.tar.gz
 Source1:	http://download.osgeo.org//proj/proj-datumgrid-1.5.zip
 Patch0:		proj.copyright.patch
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
@@ -71,6 +70,7 @@ rm -rf %{buildroot}
 install -p -m 0644 nad/pj_out27.dist nad/pj_out83.dist nad/td_out.dist %{buildroot}%{_datadir}/%{name}
 install -p -m 0755 nad/test27 nad/test83 nad/testvarious %{buildroot}%{_datadir}/%{name}
 install -p -m 0644 nad/epsg %{buildroot}%{_datadir}/%{name}
+ln -s ./src/.libs/libproj.so.9.0.0 %{buildroot}/%{_libdir}/libproj.so.0
 
 %check
 pushd nad
@@ -121,6 +121,10 @@ rm -rf %{buildroot}
 %attr(0644,root,root) %{_datadir}/%{name}/epsg
 
 %changelog
+* Sun Mar 8 2015 Devrim GÜNDÜZ <devrim@gunduz.org> - 0:4.9.1RC5-1
+- Update to 4.9.1RC5
+- Create symlink for libproj.so.0, to satisfy gdalwarp dependency.
+
 * Tue Mar 3 2015 Devrim GÜNDÜZ <devrim@gunduz.org> - 0:4.9.1RC4-1
 - Update to 4.9.1RC4
 
