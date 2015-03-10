@@ -1,7 +1,7 @@
 Summary:	Point Data Abstraction Library
 Name:		PDAL
 Version:	0.9.8
-Release:	2%{?dist}
+Release:	3%{?dist}
 License:	BSD
 Group:		Applications/Libraries
 Source:		https://github.com/%{name}/%{name}/archive/%{version}.tar.gz
@@ -30,7 +30,19 @@ PCL’s techniques.
 %setup -q
 
 %build
-cmake -D CMAKE_INSTALL_PREFIX:PATH=/usr -D HEXER_LIB_DIR=%{_libdir} .
+cmake -D CMAKE_INSTALL_PREFIX:PATH=/usr \
+        -DPDAL_EMBED_BOOST=ON \
+        -DWITH_GDAL=ON \
+        -DWITH_ICONV=ON \
+        -DWITH_GEOTIFF=ON \
+        -DGEOTIFF_INCLUDE_DIR=%{_includedir}/libgeotiff \
+        -DWITH_LASZIP=ON \
+        -DWITH_LIBXML2=ON \
+        -DWITH_PYTHON=ON \
+        -DWITH_FLANN=ON \
+        -DWITH_P2G=ON \
+        -DWITH_NITRO=ON .
+
 %install
 rm -rf %{buildroot}
 make DESTDIR=%{buildroot} install
@@ -70,6 +82,9 @@ rm -rf %{buildroot}
 /usr/lib/libpdal.so.0
 
 %changelog
+* Tue Mar 10 2015 Devrim GUNDUZ <devrim@gunduz.org> 0.9.8-3
+- Add support for more stuff.
+
 * Sun Mar 8 2015 Devrim GUNDUZ <devrim@gunduz.org> 0.9.8-2
 - Rebuild with new GDAL and the new build points2grid.
 
