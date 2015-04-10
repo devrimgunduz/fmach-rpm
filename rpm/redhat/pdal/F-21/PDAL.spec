@@ -1,7 +1,7 @@
 Summary:	Point Data Abstraction Library
 Name:		PDAL
-Version:	0.9.8
-Release:	3%{?dist}
+Version:	0.9.9
+Release:	1%{?dist}
 License:	BSD
 Group:		Applications/Libraries
 Source:		https://github.com/%{name}/%{name}/archive/%{version}.tar.gz
@@ -31,17 +31,9 @@ PCL’s techniques.
 
 %build
 cmake -D CMAKE_INSTALL_PREFIX:PATH=/usr \
-        -DPDAL_EMBED_BOOST=ON \
-        -DWITH_GDAL=ON \
-        -DWITH_ICONV=ON \
         -DWITH_GEOTIFF=ON \
         -DGEOTIFF_INCLUDE_DIR=%{_includedir}/libgeotiff \
-        -DWITH_LASZIP=ON \
-        -DWITH_LIBXML2=ON \
-        -DWITH_PYTHON=ON \
-        -DWITH_FLANN=ON \
-        -DWITH_P2G=ON \
-        -DWITH_NITRO=ON .
+        -DWITH_LASZIP=ON .
 
 %install
 rm -rf %{buildroot}
@@ -52,36 +44,20 @@ rm -rf %{buildroot}
 
 %files
 %defattr(-, root, root)
-%{_bindir}/pc2pc
-%{_bindir}/pcequal
-%{_bindir}/pcinfo
-%{_bindir}/pcpipeline
-%{_bindir}/pcquery
+%{_bindir}/pdal
 %{_bindir}/pdal-config
-%{_includedir}/pdal/*.h
 %{_includedir}/pdal/*.hpp
-%{_includedir}/pdal/drivers/buffer/*.hpp
-%{_includedir}/pdal/drivers/caris/*.hpp
-%{_includedir}/pdal/drivers/faux/*.hpp
-%{_includedir}/pdal/drivers/las/*.hpp
-%{_includedir}/pdal/drivers/mrsid/*.hpp
-%{_includedir}/pdal/drivers/nitf/*.hpp
-%{_includedir}/pdal/drivers/oci/*.hpp
-%{_includedir}/pdal/drivers/oci/*.h
-%{_includedir}/pdal/drivers/p2g/*.hpp
-%{_includedir}/pdal/drivers/pgpointcloud/*.hpp
-%{_includedir}/pdal/drivers/pipeline/*.hpp
-%{_includedir}/pdal/drivers/qfit/*.hpp
-%{_includedir}/pdal/drivers/soci/*.hpp
-%{_includedir}/pdal/drivers/terrasolid/*.hpp
-%{_includedir}/pdal/drivers/text/*.hpp
-%{_includedir}/pdal/filters/*.hpp
+%{_includedir}/pdal/*.h
 %{_includedir}/pdal/plang/*.hpp
-%{_includedir}/pdal/third/nanoflann.hpp
-/usr/lib/libpdal.so
-/usr/lib/libpdal.so.0
+%{_includedir}/pdal/util/*.hpp
+/usr/lib/libpdal_util.so
+/usr/lib/libpdalcpp.so
+/usr/lib/pdal/cmake/PDAL*.cmake
 
 %changelog
+* Fri Apr 10 2015 Devrim GUNDUZ <devrim@gunduz.org> 0.9.9-1
+- Update to 0.9.9
+
 * Tue Mar 10 2015 Devrim GUNDUZ <devrim@gunduz.org> 0.9.8-3
 - Add support for more stuff.
 
