@@ -55,7 +55,7 @@ rm -rf %{buildroot}
 /usr/lib/pdal/cmake/PDAL*.cmake
 
 %changelog
-* Fri Apr 10 2015 Devrim GUNDUZ <devrim@gunduz.org> 0.9.1-1
+* Fri Apr 10 2015 Devrim GUNDUZ <devrim@gunduz.org> 0.9.9-1
 - Update to 0.9.9
 
 * Tue Mar 10 2015 Devrim GUNDUZ <devrim@gunduz.org> 0.9.8-3
