@@ -50,6 +50,8 @@ rm -rf %{buildroot}
 %{_includedir}/pdal/*.h
 %{_includedir}/pdal/plang/*.hpp
 %{_includedir}/pdal/util/*.hpp
+/usr/lib/libpdal_plugin_reader_pgpointcloud.so
+/usr/lib/libpdal_plugin_writer_pgpointcloud.so
 /usr/lib/libpdal_util.so
 /usr/lib/libpdalcpp.so
 /usr/lib/pdal/cmake/PDAL*.cmake
