@@ -68,3 +68,66 @@
  
  namespace pcl
  {
+--- io/include/pcl/io/impl/vtk_lib_io.hpp.old	2015-03-04 00:53:46.537076590 +0000
++++ io/include/pcl/io/impl/vtk_lib_io.hpp	2015-03-04 00:54:07.474855344 +0000
+@@ -51,15 +51,15 @@
+ #ifdef __GNUC__
+ #pragma GCC system_header
+ #endif
+-#include <vtkVersion.h>
+-#include <vtkFloatArray.h>
+-#include <vtkPointData.h>
+-#include <vtkPoints.h>
+-#include <vtkPolyData.h>
+-#include <vtkUnsignedCharArray.h>
+-#include <vtkSmartPointer.h>
+-#include <vtkStructuredGrid.h>
+-#include <vtkVertexGlyphFilter.h>
++#include <vtk/vtkVersion.h>
++#include <vtk/vtkFloatArray.h>
++#include <vtk/vtkPointData.h>
++#include <vtk/vtkPoints.h>
++#include <vtk/vtkPolyData.h>
++#include <vtk/vtkUnsignedCharArray.h>
++#include <vtk/vtkSmartPointer.h>
++#include <vtk/vtkStructuredGrid.h>
++#include <vtk/vtkVertexGlyphFilter.h>
+ 
+ ///////////////////////////////////////////////////////////////////////////////////////////
+ template <typename PointT> void
+--- surface/include/pcl/surface/vtk_smoothing/vtk.h.old	2015-03-04 08:09:42.906188079 +0000
++++ surface/include/pcl/surface/vtk_smoothing/vtk.h	2015-03-04 08:10:00.656993729 +0000
+@@ -43,8 +43,8 @@
+ #  pragma GCC system_header 
+ #endif
+ 
+-#include <vtkPolyData.h>
+-#include <vtkSmartPointer.h>
++#include <vtk/vtkPolyData.h>
++#include <vtk/vtkSmartPointer.h>
+ 
+ #endif    // PCL_SURFACE_VTK_H_
+ 
+--- surface/src/vtk_smoothing/vtk_utils.cpp.old	2015-03-04 09:41:36.582170596 +0000
++++ surface/src/vtk_smoothing/vtk_utils.cpp	2015-03-04 09:41:51.464012529 +0000
+@@ -41,13 +41,13 @@
+ 
+ #include <pcl/conversions.h>
+ #include <pcl/common/common.h>
+-#include <vtkVersion.h>
+-#include <vtkCellArray.h>
+-#include <vtkTriangleFilter.h>
+-#include <vtkPoints.h>
+-#include <vtkPolyData.h>
+-#include <vtkPointData.h>
+-#include <vtkFloatArray.h>
++#include <vtk/vtkVersion.h>
++#include <vtk/vtkCellArray.h>
++#include <vtk/vtkTriangleFilter.h>
++#include <vtk/vtkPoints.h>
++#include <vtk/vtkPolyData.h>
++#include <vtk/vtkPointData.h>
++#include <vtk/vtkFloatArray.h>
+ 
+ 
+ //////////////////////////////////////////////////////////////////////////////////////////////
