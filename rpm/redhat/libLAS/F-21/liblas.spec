@@ -17,7 +17,7 @@ archival.
 %package devel
 Summary:        The development files for liblas
 Group:          Development/Libraries
-Requires:	%{name} = %{version}-%{release}
+Requires:	%{name}-libs%{?_isa} = %{version}-%{release}
 
 %description devel
 Development headers and libraries for liblas.
@@ -25,7 +25,6 @@ Development headers and libraries for liblas.
 %package libs
 Summary:        The shared libraries required for liblas
 Group:          Applications/Databases
-Requires:	%{name}-libs%{?_isa} = %{version}-%{release}
 
 %description libs
 The liblas-libs package provides the essential shared libraries for any
@@ -44,7 +43,7 @@ to use liblas
 	-DWITH_UTILITIES:BOOL=ON \
 	-DLIBLAS_LIB_SUBDIR:PATH=%{_lib} \
 	-DCMAKE_BUILD_TYPE:STRING="Release" \
-	-DWITH_PKGCONFIG:BOOL=ON \
+	-DWITH_PKGCONFIG:BOOL=OFF \
 	-DCMAKE_SKIP_RPATH:BOOL=ON .
 
 make %{?_smp_mflags}
@@ -69,16 +68,15 @@ make install/fast DESTDIR=%{buildroot}
 %{_bindir}/las2txt
 %{_bindir}/lasblock
 %{_bindir}/lasinfo
-#%{_bindir}/liblas-config
 %{_bindir}/ts2las
 %{_bindir}/txt2las
 %{_libdir}/liblas.so.2.3.0
 %{_libdir}/liblas.so.3
 %{_libdir}/liblas_c.so.2.3.0
 %{_libdir}/liblas_c.so.3
-%{_libdir}/pkgconfig/liblas.pc
 
 %files devel
+%{_bindir}/liblas-config
 %{_includedir}/liblas/
 %{_datadir}/cmake/libLAS-%{version}/
 %{_datadir}/%{name}/doc/
@@ -96,6 +94,7 @@ make install/fast DESTDIR=%{buildroot}
  - Update %%install section
  - Improve cmake build parameters, also fix rpath
  - move liblaszip.so symlink to -devel subpkg
+ - move liblas-config to -devel subpackage
 
   * Split -devel and -libs subpackages
 * Fri Apr 17 2015 Devrim GUNDUZ <devrim@gunduz.org> 1.8.0-2
