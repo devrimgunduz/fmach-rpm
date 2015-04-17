@@ -1,12 +1,10 @@
 Summary:	Quickly turns bulky LAS files into compant LAZ files
 Name:		laszip
 Version:	2.2.0
-Release:	3%{?dist}
-License:	GPLv2+
-Group:		Development/Libraries
+Release:	4%{?dist}
+License:	LGPLv2
 Source0:	https://github.com/LASzip/LASzip/releases/download/v%{version}/%{name}-src-%{version}.tar.gz
 URL:		http://www.laszip.org/
-BuildRequires:	cmake
 
 %description
 LASzip - a free product of rapidlasso GmbH - quickly turns bulky LAS files into
@@ -14,8 +12,7 @@ compact LAZ files without information loss.
 
 %package devel
 Summary:	The development files for laszip
-Group:		Development/Libraries
-Requires:	%{name} = %{version}-%{release}
+Requires:	%{name}%{?_isa} = %{version}-%{release}
 
 %description devel
 Development headers and libraries for laszip
@@ -24,7 +21,9 @@ Development headers and libraries for laszip
 %setup -q -n %{name}-src-%{version}
 
 %build
-%configure --includedir=%{_includedir}/laszip
+CFLAGS="$CFLAGS -lstdc++" ; export CFLAGS
+%configure --includedir=%{_includedir}/laszip --disable-static
+%{__make} %{?_smp_mflags}
 
 %install
 %make_install
@@ -32,24 +31,30 @@ Development headers and libraries for laszip
 # Remove .la files
 %{__rm} -f %{buildroot}%{_libdir}/liblaszip.la
 
-%clean
-%{__rm} -rf %{buildroot}
-
-%postun -p /sbin/ldconfig 
-%post -p /sbin/ldconfig 
+%postun -p /sbin/ldconfig
+%post -p /sbin/ldconfig
 
 %files
-%doc INSTALL AUTHORS
+%doc AUTHORS
 %license COPYING
 %{_bindir}/laszippertest
 %{_libdir}/liblaszip.so*
 
 %files devel
-%{_includedir}/laszip/*.hpp
-%{_libdir}/liblaszip.a
-
+%{_includedir}/laszip/
 
 %changelog
+* Fri Apr 17 2015 Devrim GUNDUZ <devrim@gunduz.org> 2.2.0-4
+- More fixes per Fedora review:
+ - Update license
+ - omit liblaszip.a static library
+ - fix liblaszip undefined symbols, by adding -lstdc++ CFLAG
+ - omit INSTALL from %%doc
+ - Own %%{_includedir}/laszip/ directory
+ - devel subpkg now depends on main package
+ - omit deprecated Group: tags and %%clean section
+ - drop not needed dependency to cmake
+
 * Fri Apr 17 2015 Devrim GUNDUZ <devrim@gunduz.org> 2.2.0-3
 - Various fixes per Fedora review #1199296
   * Add devel subpackage
