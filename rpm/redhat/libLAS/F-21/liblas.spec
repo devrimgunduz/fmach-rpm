@@ -1,13 +1,12 @@
 Summary:	LAS 1.0/1.1/1.2 ASPRS LiDAR data translation toolset
 Name:		liblas
 Version:	1.8.0
-Release:	2%{?dist}
-License:	BSD
-Group:		Development/Libraries
+Release:	3%{?dist}
+License:	BSD and Boost
 Source:		http://download.osgeo.org/%{name}/libLAS-%{version}.tar.bz2
 URL:		http://www.liblas.org/
 BuildRequires:	cmake, libgeotiff-devel, boost-devel >= 1.53 laszip-devel
-Requires:       %{name}-libs = %{version}-%{release}, laszip
+Requires:	%{name}-libs%{?_isa} = %{version}-%{release}, laszip
 
 %description
 libLAS is a C/C++ library for reading and writing the very common LAS LiDAR
@@ -26,6 +25,7 @@ Development headers and libraries for liblas.
 %package libs
 Summary:        The shared libraries required for liblas
 Group:          Applications/Databases
+Requires:	%{name}-libs%{?_isa} = %{version}-%{release}
 
 %description libs
 The liblas-libs package provides the essential shared libraries for any
@@ -36,32 +36,32 @@ to use liblas
 %setup -q -n libLAS-%{version}
 
 %build
-cmake	-DWITH_GDAL:BOOL=ON \
+%cmake	-DWITH_GDAL:BOOL=ON \
 	-DWITH_GEOTIFF:BOOL=ON \
-	-DGEOTIFF_INCLUDE_DIR:STRING="/usr/include/libgeotiff" \
-	-DWITH_LASZIP:BOOL=OFF \
+	-DGEOTIFF_INCLUDE_DIR:PATH="$(pkg-config --variable=includedir libgeotiff)" \
+	-DWITH_LASZIP:BOOL=ON \
 	-DWITH_TESTS:BOOL=OFF \
 	-DWITH_UTILITIES:BOOL=ON \
-	-DCMAKE_INSTALL_PREFIX:PATH=/usr \
 	-DLIBLAS_LIB_SUBDIR:PATH=%{_lib} \
-	-DCMAKE_BUILD_TYPE:STRING="Release" ../%{name}-%{version}/ .
+	-DCMAKE_BUILD_TYPE:STRING="Release" \
+	-DWITH_PKGCONFIG:BOOL=ON \
+	-DCMAKE_SKIP_RPATH:BOOL=ON .
+
+make %{?_smp_mflags}
 
 %install
-%make_install
-
-%clean
-%{__rm} -rf %{buildroot}
+make install/fast DESTDIR=%{buildroot}
 
 %postun -p /sbin/ldconfig
 %post -p /sbin/ldconfig
 
 %files libs
-%{_libdir}/liblas.so*
-%{_libdir}/liblas_c.so*
+%license LICENSE.txt
+%{_libdir}/liblas.so
+%{_libdir}/liblas_c.so
 
 %files
-%doc AUTHORS INSTALL README.txt LICENSE.txt
-%license COPYING
+%doc AUTHORS README.txt
 %dir %{_includedir}/liblas
 %dir %{_datadir}/cmake/libLAS-%{version}
 %{_bindir}/las2las
@@ -69,26 +69,32 @@ cmake	-DWITH_GDAL:BOOL=ON \
 %{_bindir}/las2txt
 %{_bindir}/lasblock
 %{_bindir}/lasinfo
-%{_bindir}/liblas-config
+#%{_bindir}/liblas-config
 %{_bindir}/ts2las
 %{_bindir}/txt2las
+%{_libdir}/liblas.so.2.*
+%{_libdir}/liblas_c.so.3.*
 
 %files devel
-%{_includedir}/liblas/*.hpp
-%{_includedir}/liblas/capi/*.h
-%{_includedir}/liblas/detail/*.hpp
-%{_includedir}/liblas/detail/index/*.hpp
-%{_includedir}/liblas/detail/reader/*.hpp
-%{_includedir}/liblas/detail/writer/*.hpp
-%{_includedir}/liblas/external/property_tree/detail/*.hpp
-%{_includedir}/liblas/external/property_tree/*.hpp
-%{_datadir}/cmake/libLAS-%{version}/liblas-config-version.cmake
-%{_datadir}/cmake/libLAS-%{version}/liblas-config.cmake
-%{_datadir}/cmake/libLAS-%{version}/liblas-depends-release.cmake
-%{_datadir}/cmake/libLAS-%{version}/liblas-depends.cmake
-%{_datadir}/%{name}/doc/*
+%{_includedir}/liblas/
+%{_datadir}/cmake/libLAS-%{version}/
+%{_datadir}/%{name}/doc/
 
 %changelog
+* Fri Apr 17 2015 Devrim GUNDUZ <devrim@gunduz.org> 1.8.0-3
+- Various updates, per Fedora review from Rex:
+ - Update license
+ - omit INSTALL from %%doc
+ - Own directories in -devel subpackage
+ - omit deprecated Group: tags and %%clean section
+ - Use better macros for make and cmake
+ - use %%{?_isa} macro in subpkg dependencies
+ - have %build section envoke 'make'
+ - Update %%install section
+ - Improve cmake build parameters, also fix rpath
+ - move liblaszip.so symlink to -devel subpkg
+
+  * Split -devel and -libs subpackages
 * Fri Apr 17 2015 Devrim GUNDUZ <devrim@gunduz.org> 1.8.0-2
 - Various updates:
   * Split -devel and -libs subpackages
