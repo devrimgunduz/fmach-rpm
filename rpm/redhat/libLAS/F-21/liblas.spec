@@ -30,15 +30,17 @@ cmake	-DWITH_GDAL:BOOL=ON \
 	-DCMAKE_BUILD_TYPE:STRING="Release" ../%{name}-%{version}/ .
 
 %install
-rm -rf %{buildroot}
+%{__rm} -rf %{buildroot}
 make DESTDIR=%{buildroot} install
 
 %clean
-rm -rf %{buildroot}
+%{__rm} -rf %{buildroot}
 
 %files
 %defattr(-, root, root)
 %doc AUTHORS COPYING INSTALL README.txt LICENSE.txt
+%dir %{_includedir}/liblas
+%dir %{_datadir}/cmake/libLAS-%{version}
 %{_bindir}/las2las
 %{_bindir}/las2ogr
 %{_bindir}/las2txt
