@@ -6,8 +6,8 @@ License:	BSD
 Group:		Development/Libraries
 Source:		http://download.osgeo.org/%{name}/libLAS-%{version}.tar.bz2
 URL:		http://www.liblas.org/
-BuildRequires:	cmake, libgeotiff-devel, boost-devel >= 1.53 laszip
-Requires:       %{name}-libs = %{version}-%{release}
+BuildRequires:	cmake, libgeotiff-devel, boost-devel >= 1.53 laszip-devel
+Requires:       %{name}-libs = %{version}-%{release}, laszip
 
 %description
 libLAS is a C/C++ library for reading and writing the very common LAS LiDAR
@@ -99,6 +99,7 @@ cmake	-DWITH_GDAL:BOOL=ON \
   * Remove %%defattr
   * Run ldconfig
   * Fix version numbers in spec file
+  * BR laszip-devel, and require laszip, per recent laszip changes.
 
 * Tue Jan 13 2015 Devrim GUNDUZ <devrim@gunduz.org> 1.8.0-1
 - Initial packaging
