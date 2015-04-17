@@ -72,8 +72,11 @@ make install/fast DESTDIR=%{buildroot}
 #%{_bindir}/liblas-config
 %{_bindir}/ts2las
 %{_bindir}/txt2las
-%{_libdir}/liblas.so.2.*
-%{_libdir}/liblas_c.so.3.*
+%{_libdir}/liblas.so.2.3.0
+%{_libdir}/liblas.so.3
+%{_libdir}/liblas_c.so.2.3.0
+%{_libdir}/liblas_c.so.3
+%{_libdir}/pkgconfig/liblas.pc
 
 %files devel
 %{_includedir}/liblas/
