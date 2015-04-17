@@ -61,8 +61,8 @@ make install/fast DESTDIR=%{buildroot}
 
 %files
 %doc AUTHORS README.txt
-%dir %{_includedir}/liblas
-%dir %{_datadir}/cmake/libLAS-%{version}
+%{_includedir}/liblas
+%{_datadir}/cmake/libLAS-%{version}
 %{_bindir}/las2las
 %{_bindir}/las2ogr
 %{_bindir}/las2txt
