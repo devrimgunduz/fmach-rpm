@@ -38,10 +38,11 @@ CFLAGS="$CFLAGS -lstdc++" ; export CFLAGS
 %doc AUTHORS
 %license COPYING
 %{_bindir}/laszippertest
-%{_libdir}/liblaszip.so*
+%{_libdir}/liblaszip.so.6*
 
 %files devel
 %{_includedir}/laszip/
+%{_libdir}/liblaszip.so
 
 %changelog
 * Fri Apr 17 2015 Devrim GUNDUZ <devrim@gunduz.org> 2.2.0-4
@@ -54,6 +55,7 @@ CFLAGS="$CFLAGS -lstdc++" ; export CFLAGS
  - devel subpkg now depends on main package
  - omit deprecated Group: tags and %%clean section
  - drop not needed dependency to cmake
+ - move liblaszip.so symlink to -devel subpkg
 
 * Fri Apr 17 2015 Devrim GUNDUZ <devrim@gunduz.org> 2.2.0-3
 - Various fixes per Fedora review #1199296
