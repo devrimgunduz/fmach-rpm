@@ -95,8 +95,8 @@ make install/fast DESTDIR=%{buildroot}
  - Improve cmake build parameters, also fix rpath
  - move liblaszip.so symlink to -devel subpkg
  - move liblas-config to -devel subpackage
+ - Split -devel and -libs subpackages
 
-  * Split -devel and -libs subpackages
 * Fri Apr 17 2015 Devrim GUNDUZ <devrim@gunduz.org> 1.8.0-2
 - Various updates:
   * Split -devel and -libs subpackages
