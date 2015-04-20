@@ -1,3 +1,6 @@
+%global pgmajorversion 94
+%global pginstdir /usr/pgsql-9.4
+
 Summary:	Point Data Abstraction Library
 Name:		PDAL
 Version:	0.9.9
@@ -6,9 +9,13 @@ License:	BSD
 Source:		https://github.com/%{name}/%{name}/archive/%{version}.tar.gz
 URL:		http://www.pdal.io
 BuildRequires:	cmake boost-devel >= 1.57, proj >= 4.9.0, boost >= 1.57
-BuildRequires:	hexer-devel
+BuildRequires:	hexer-devel, postgresql%{pgmajorversion}-devel, geos-devel
+BuildRequires:	pcl-devel, openni-devel, qhull-devel, zlib-devel, eigen3-devel
+BuildRequires:	python-devel
 Requires:	gdal >= 1.11, libgeotiff >= 1.4.0, pcl >= 1.7.2, hexer
 Requires:	points2grid >= 1.3.0, nitro >= 2.7, laszip >= 2.2.0
+Requires:	postgresql%{pgmajorversion}, geos, pcl, openni, qhull
+Requires:	zlib, eigen3
 
 %description
 PDAL is a BSD licensed library for translating and manipulating point cloud
@@ -25,10 +32,10 @@ niches, however, and PDAL provides a user the ability to exploit data using
 PCL’s techniques.
 
 %package devel
-Summary:        PDAL development header files and libraries
-Group:          Development/Libraries
-Requires:       %{name}%{?_isa} = %{version}-%{release}
-Requires:       %{name}-libs%{?_isa} = %{version}-%{release}
+Summary:	PDAL development header files and libraries
+Group:		Development/Libraries
+Requires:	%{name}%{?_isa} = %{version}-%{release}
+Requires:	%{name}-libs%{?_isa} = %{version}-%{release}
 
 %description devel
 The pdal-devel package contains the header files and libraries needed to
@@ -38,13 +45,23 @@ compile C or C++ applications which will directly interact with PDAL.
 %setup -q
 
 %build
-%cmake 	-D PDAL_LIB_INSTALL_DIR:PATH=%{_lib} \
+%cmake	-D PDAL_LIB_INSTALL_DIR:PATH=%{_lib} \
 	-D CMAKE_INSTALL_LIBDIR:PATH=%{_lib} \
 	-D CMAKE_VERBOSE_MAKEFILE=ON  \
-        -D WITH_GEOTIFF=ON \
-        -D GEOTIFF_INCLUDE_DIR=%{_includedir}/libgeotiff \
-        -D WITH_LASZIP=ON \
-	-D PDAL_HAVE_HEXER=ON .
+	-D WITH_GEOTIFF=ON \
+	-D GEOTIFF_INCLUDE_DIR=%{_includedir}/libgeotiff \
+	-D WITH_LASZIP=ON \
+	-D PDAL_HAVE_HEXER=ON \
+	-D PDAL_HAVE_GEOS=ON \
+	-D PDAL_HAVE_PYTHON=ON \
+	-D BUILD_PLUGIN_PYTHON=ON \
+	-D BUILD_PLUGIN_HEXBIN=ON \
+	-D PDAL_HAVE_LIBGEOTIFF=ON \
+	-D BUILD_PLUGIN_PCL=ON \
+	-D POSTGRESQL_INCLUDE_DIR=%{pginstdir}/include \
+	-D POSTGRESQL_LIBRARIES=%{pginstdir}/lib/libpq.so \
+	-D OPENNI2_INCLUDE_DIRS:PATH=%{_includedir}/ni \
+	-D OPENNI2_LIBRARY:FILEPATH=%{_libdir}/libOpenNI.so .
 
 make %{?_smp_mflags}
 
@@ -66,6 +83,18 @@ make install/fast DESTDIR=%{buildroot}
 %{_libdir}/libpdal_plugin_writer_pgpointcloud.so
 %{_libdir}/libpdal_util.so
 %{_libdir}/libpdalcpp.so
+%{_libdir}/libpdal_plugin_filter_ground.so
+%{_libdir}/libpdal_plugin_filter_hexbin.so
+%{_libdir}/libpdal_plugin_filter_pclblock.so
+%{_libdir}/libpdal_plugin_filter_predicate.so
+%{_libdir}/libpdal_plugin_filter_programmable.so
+%{_libdir}/libpdal_plugin_kernel_ground.so
+%{_libdir}/libpdal_plugin_kernel_pcl.so
+%{_libdir}/libpdal_plugin_kernel_smooth.so
+%{_libdir}/libpdal_plugin_kernel_view.so
+%{_libdir}/libpdal_plugin_reader_pcd.so
+%{_libdir}/libpdal_plugin_writer_pcd.so
+%{_libdir}/libpdal_plugin_writer_pclvisualizer.so
 
 %files devel
 %{_includedir}/pdal/
@@ -88,6 +117,10 @@ make install/fast DESTDIR=%{buildroot}
  - No need to cleanup buildroot during %%install
  - Remove %%defattr
  - Run ldconfig
+ - Add PostgreSQL and PointCloud support
+ - Add Python and PCL plugins
+ - Build with GEOS and OPENNI2 support
+ - Update BR and Requires
 
 * Fri Apr 10 2015 Devrim GUNDUZ <devrim@gunduz.org> 0.9.9-2
 - Add -devel subpackage, and move related files there.
