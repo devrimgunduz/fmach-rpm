@@ -50,6 +50,9 @@ make %{?_smp_mflags}
 
 %install
 make install/fast DESTDIR=%{buildroot}
+# Remove duplicated cmake files
+%{__rm} -f %{buildroot}/usr/lib/pdal/cmake/PDAL*.cmake
+
 
 %postun -p /sbin/ldconfig
 %post -p /sbin/ldconfig
