@@ -66,9 +66,7 @@ make install/fast DESTDIR=%{buildroot}
 
 %files devel
 %{_includedir}/pdal/
-%{_includedir}/pdal/plang
-%{_includedir}/pdal/util/
-/usr/lib/pdal/cmake/PDAL*.cmake
+%{_libdir}/pdal/cmake/PDAL*.cmake
 
 %changelog
 * Mon Apr 20 2015 Devrim GUNDUZ <devrim@gunduz.org> 0.9.9-3
