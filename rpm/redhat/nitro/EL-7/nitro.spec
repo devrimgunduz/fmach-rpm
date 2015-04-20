@@ -1,12 +1,10 @@
 Summary:	Extensible library solution for reading and writing National Imagery Transmission Format (NITF)
 Name:		nitro
 Version:	2.7
-Release:	1%{?dist}
-License:	BSD
-Group:		Development/Libraries
+Release:	2%{?dist}
+License:	GPL and GLPLv2
 Source:		nitro-2.7.tar.bz2
 URL:		https://github.com/hobu/nitro
-BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildRequires:	cmake
 
 %description
@@ -17,36 +15,42 @@ files for writers.nitf.
 %setup -q
 
 %build
-cmake -D CMAKE_INSTALL_PREFIX:PATH=/usr -D STATIC_BUILD:BOOL=OFF .
+%cmake	-D STATIC_BUILD:BOOL=OFF \
+	-D BUILD_SHARED_LIBS:BOOL=ON \
+	-D NITRO_LIB_SUBDIR=%{_libdir} .
+
+make %{?_smp_mflags}
 
 %install
-rm -rf %{buildroot}
-make DESTDIR=%{buildroot} install
+make install/fast DESTDIR=%{buildroot}
 
-%clean
-rm -rf %{buildroot}
+%postun -p /sbin/ldconfig
+%post -p /sbin/ldconfig
 
 %files
-%defattr(-, root, root)
 %doc README.md
-%{_includedir}/nitro/c++/except/*.h
-%{_includedir}/nitro/c++/import/*.h
-%{_includedir}/nitro/c++/import/*.hpp
-%{_includedir}/nitro/c++/io/*.h
-%{_includedir}/nitro/c++/logging/*.h
-%{_includedir}/nitro/c++/mem/*.h
-%{_includedir}/nitro/c++/mt/*.h
-%{_includedir}/nitro/c++/nitf/*.hpp
-%{_includedir}/nitro/c++/str/*.h
-%{_includedir}/nitro/c++/sys/*.h
-%{_includedir}/nitro/c/import/*.h
-%{_includedir}/nitro/c/nitf/*.h
-%{_includedir}/nitro/c/nrt/*.h
-   /usr/lib/libnitf-c.so
-   /usr/lib/libnitf-cpp.so
-   /usr/pkgconfig/libnitf.pc
+%license COPYING COPYING.LESSER
+%{_includedir}/nitro/
+%{_libdir}/libnitf-c.so
+%{_libdir}/libnitf-cpp.so
+%{_usr}/pkgconfig/libnitf.pc
 
 %changelog
-* Tue Jan 13 2015 Devrim GUNDUZ <devrim@gunduz.org> 1.3.0-1
+* Mon Apr 20 2015 Devrim Gündüz <devrim@gunduz.org> 2.7.0-2
+- Various updates:
+ - Own directories in main package
+ - omit deprecated Group: tags and %%clean section
+ - Use better macros for make and cmake
+ - have %%build section envoke 'make'
+ - Update %%install section
+ - Improve cmake build parameters
+ - Use %%license macro
+ - Get rid of BuildRoot definition
+ - No need to cleanup buildroot during %%install
+ - Remove %%defattr
+ - Run ldconfig
+ - Update license
+
+* Tue Jan 13 2015 Devrim Gündüz <devrim@gunduz.org> 2.7.0-1
 - Initial packaging
 
