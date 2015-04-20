@@ -13,6 +13,7 @@ Requires:	gdal >= 1.11, libgeotiff >= 1.4.0, pcl >= 1.7.2, hexer
 Requires:	points2grid >= 1.3.0, nitro >= 2.7, laszip >= 2.2.0
 Requires:	postgresql, geos, pcl, openni, qhull
 Requires:	zlib, eigen3
+Requires:	%{name}-libs%{?_isa} = %{version}-%{release}
 
 %description
 PDAL is a BSD licensed library for translating and manipulating point cloud
@@ -37,6 +38,15 @@ Requires:	%{name}-libs%{?_isa} = %{version}-%{release}
 %description devel
 The pdal-devel package contains the header files and libraries needed to
 compile C or C++ applications which will directly interact with PDAL.
+
+%package libs
+Summary:	The shared libraries required for PDAL
+Group:		Development/Libraries
+
+%description libs
+The pdal-libs package provides the essential shared libraries for any
+PDAL client program or interface. You will need to install this package
+to use PDAL
 
 %prep
 %setup -q
@@ -76,6 +86,8 @@ make install/fast DESTDIR=%{buildroot}
 %doc doc/
 %{_bindir}/pdal
 %{_bindir}/pdal-config
+
+%files libs
 %{_libdir}/libpdal_plugin_reader_pgpointcloud.so
 %{_libdir}/libpdal_plugin_writer_pgpointcloud.so
 %{_libdir}/libpdal_util.so
@@ -118,6 +130,7 @@ make install/fast DESTDIR=%{buildroot}
  - Add Python and PCL plugins
  - Build with GEOS and OPENNI2 support
  - Update BR and Requires
+ - Add -libs subpackage, and move related files there
 
 * Fri Apr 10 2015 Devrim GUNDUZ <devrim@gunduz.org> 0.9.9-2
 - Add -devel subpackage, and move related files there.
