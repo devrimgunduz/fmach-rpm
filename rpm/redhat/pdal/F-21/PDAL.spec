@@ -83,18 +83,18 @@ make install/fast DESTDIR=%{buildroot}
 %{_libdir}/libpdal_plugin_writer_pgpointcloud.so
 %{_libdir}/libpdal_util.so
 %{_libdir}/libpdalcpp.so
-%{_libdir}libpdal_plugin_filter_ground.so
-%{_libdir}libpdal_plugin_filter_hexbin.so
-%{_libdir}libpdal_plugin_filter_pclblock.so
-%{_libdir}libpdal_plugin_filter_predicate.so
-%{_libdir}libpdal_plugin_filter_programmable.so
-%{_libdir}libpdal_plugin_kernel_ground.so
-%{_libdir}libpdal_plugin_kernel_pcl.so
-%{_libdir}libpdal_plugin_kernel_smooth.so
-%{_libdir}libpdal_plugin_kernel_view.so
-%{_libdir}libpdal_plugin_reader_pcd.so
-%{_libdir}libpdal_plugin_writer_pcd.so
-%{_libdir}libpdal_plugin_writer_pclvisualizer.so
+%{_libdir}/libpdal_plugin_filter_ground.so
+%{_libdir}/libpdal_plugin_filter_hexbin.so
+%{_libdir}/libpdal_plugin_filter_pclblock.so
+%{_libdir}/libpdal_plugin_filter_predicate.so
+%{_libdir}/libpdal_plugin_filter_programmable.so
+%{_libdir}/libpdal_plugin_kernel_ground.so
+%{_libdir}/libpdal_plugin_kernel_pcl.so
+%{_libdir}/libpdal_plugin_kernel_smooth.so
+%{_libdir}/libpdal_plugin_kernel_view.so
+%{_libdir}/libpdal_plugin_reader_pcd.so
+%{_libdir}/libpdal_plugin_writer_pcd.so
+%{_libdir}/libpdal_plugin_writer_pclvisualizer.so
 
 %files devel
 %{_includedir}/pdal/
