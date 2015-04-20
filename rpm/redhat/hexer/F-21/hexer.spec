@@ -5,10 +5,10 @@ Release:	2%{?dist}
 License:	GLPLv2
 Source:		https://github.com/hobu/hexer/archive/%{version}.tar.gz
 URL:		https://github.com/hobu/hexer
-BuildRequires:	cmake
+BuildRequires:	cmake, gdal-devel => 1.9.0
 BuildRequires:	boost-program-options >= 1.57, boost-thread >= 1.57, boost-iostreams >= 1.57
 BuildRequires:	boost-filesystem >= 1.57, boost-system >= 1.57, boost-random >= 1.57
-Requires:	%{name}-libs%{?_isa} = %{version}-%{release}
+Requires:	%{name}-libs%{?_isa} = %{version}-%{release}, gdal-libs >= 1.9.0
 
 %description
 Hexer is a LGPL C++ library that provides some classes for generating hexbin
@@ -38,7 +38,9 @@ Development headers and libraries for hexer
 
 %build
 %cmake	-D HEXER_LIB_DIR=%{_libdir} \
-	-D LIB_INSTALL_DIR=%{_lib} .
+	-D LIB_INSTALL_DIR=%{_lib} \
+	-D HEXER_HAVE_GDAL=ON .
+
 make %{?_smp_mflags}
 
 %install
@@ -79,6 +81,7 @@ make %{?_smp_mflags} install/fast DESTDIR=%{buildroot}
  - No need to cleanup buildroot during %%install
  - Remove %%defattr
  - Run ldconfig
+ - Build with GDAL support
 
 * Tue Jan 13 2015 Devrim GUNDUZ <devrim@gunduz.org> 1.3.0-1
 - Initial packaging
