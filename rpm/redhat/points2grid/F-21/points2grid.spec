@@ -1,15 +1,14 @@
-Summary:	points2grid
+Summary:	Generate Digital Elevation Models (DEM) using a local gridding method
 Name:		points2grid
 Version:	1.3.0
-Release:	2%{?dist}
+Release:	3%{?dist}
 License:	BSD
-Group:		Applications/Libraries
 Source:		https://github.com/CRREL/%{name}/archive/%{version}.tar.gz
 URL:		https://github.com/CRREL/points2grid
-BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildRequires:	cmake libcurl-devel bzip2-devel gdal gdal-devel boost-devel >= 1.57
 BuildRequires:	gcc-c++
 Requires:	boost-iostreams >= 1.57 boost-program-options >= 1.57
+
 %description
 Points2Grid generates Digital Elevation Models (DEM) using a local gridding
 method. The local gridding algorithm computes grid cell elevation using a
@@ -22,39 +21,56 @@ node and used to represent the elevation variation over the neighbourhood
 represented by the bin. If no points are found within a given bin, the DEM
 node receives a value of null. The Points2Grid service also provides a null
 filing option, which applies an inverse distance weighted focal mean via a
-square moving window of 3, 5, or 7 pixels to fill cells in the DEM that have 
+square moving window of 3, 5, or 7 pixels to fill cells in the DEM that have
 null values.
+
+%package devel
+Summary:        points2grid development header files and libraries
+Group:          Development/Libraries
+Requires:	%{name}%{?_isa} = %{version}-%{release}
+
+%description devel
+The pdal-devel package contains the header files and libraries needed to
+compile C or C++ applications which will directly interact with PDAL.
 
 %prep
 %setup -q
 
 %build
-cmake -D CMAKE_INSTALL_PREFIX:PATH=/usr .
+%cmake .
+make %{?_smp_mflags}
 
 %install
-rm -rf %{buildroot}
-make DESTDIR=%{buildroot} install
+make install/fast DESTDIR=%{buildroot}
 
-%clean
-rm -rf %{buildroot}
+%postun -p /sbin/ldconfig
+%post -p /sbin/ldconfig
 
 %files
-%defattr(-, root, root)
+%doc README.rst RELEASE_NOTES
+%license LICENSE
 %{_bindir}/points2grid
-%{_includedir}/points2grid/CoreInterp.hpp
-%{_includedir}/points2grid/Global.hpp
-%{_includedir}/points2grid/GridFile.hpp
-%{_includedir}/points2grid/GridMap.hpp
-%{_includedir}/points2grid/GridPoint.hpp
-%{_includedir}/points2grid/InCoreInterp.hpp
-%{_includedir}/points2grid/Interpolation.hpp
-%{_includedir}/points2grid/OutCoreInterp.hpp
-%{_includedir}/points2grid/config.h
-%{_includedir}/points2grid/export.hpp
-%{_includedir}/points2grid/lasfile.hpp
- /usr/lib/libpts2grd.so
+/usr/lib/libpts2grd.so
+
+%files devel
+%{_includedir}/points2grid/
 
 %changelog
+* Mon Apr 20 2015 Devrim GUNDUZ <devrim@gunduz.org> 1.3.0-3
+ - Add -devel subpackage
+ - omit deprecated Group: tags and %%clean section
+ - Use better macros for make and cmake
+ - use %%{?_isa} macro in subpkg dependencies
+ - have %%build section envoke 'make'
+ - Update %%install section
+ - Improve cmake build parameters
+ - Use %%license macro
+ - Add %%doc
+ - Get rid of BuildRoot definition
+ - No need to cleanup buildroot during %%install
+ - Remove %%defattr
+ - Run ldconfig
+
 * Sun Mar 8 2015 Devrim GUNDUZ <devrim@gunduz.org> 1.3.0-2
 - Rebuild with GDAL 1.11.2
 
