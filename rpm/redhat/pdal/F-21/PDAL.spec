@@ -1,6 +1,3 @@
-%global pgmajorversion 94
-%global pginstdir /usr/pgsql-9.4
-
 Summary:	Point Data Abstraction Library
 Name:		PDAL
 Version:	0.9.9
@@ -9,12 +6,12 @@ License:	BSD
 Source:		https://github.com/%{name}/%{name}/archive/%{version}.tar.gz
 URL:		http://www.pdal.io
 BuildRequires:	cmake boost-devel >= 1.57, proj >= 4.9.0, boost >= 1.57
-BuildRequires:	hexer-devel, postgresql%{pgmajorversion}-devel, geos-devel
+BuildRequires:	hexer-devel, postgresql-devel, geos-devel
 BuildRequires:	pcl-devel, openni-devel, qhull-devel, zlib-devel, eigen3-devel
 BuildRequires:	python-devel
 Requires:	gdal >= 1.11, libgeotiff >= 1.4.0, pcl >= 1.7.2, hexer
 Requires:	points2grid >= 1.3.0, nitro >= 2.7, laszip >= 2.2.0
-Requires:	postgresql%{pgmajorversion}, geos, pcl, openni, qhull
+Requires:	postgresql, geos, pcl, openni, qhull
 Requires:	zlib, eigen3
 
 %description
@@ -58,8 +55,8 @@ compile C or C++ applications which will directly interact with PDAL.
 	-D BUILD_PLUGIN_HEXBIN=ON \
 	-D PDAL_HAVE_LIBGEOTIFF=ON \
 	-D BUILD_PLUGIN_PCL=ON \
-	-D POSTGRESQL_INCLUDE_DIR=%{pginstdir}/include \
-	-D POSTGRESQL_LIBRARIES=%{pginstdir}/lib/libpq.so \
+	-D POSTGRESQL_INCLUDE_DIR=%{_includedir}/pgsql \
+	-D POSTGRESQL_LIBRARIES=%{_libdir}/libpq.so \
 	-D OPENNI2_INCLUDE_DIRS:PATH=%{_includedir}/ni \
 	-D OPENNI2_LIBRARY:FILEPATH=%{_libdir}/libOpenNI.so .
 
