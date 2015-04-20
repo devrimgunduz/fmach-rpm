@@ -41,7 +41,7 @@
 
 Name:      gdal
 Version:   1.11.2
-Release:   10%{?dist}
+Release:   11%{?dist}
 Summary:   GIS file format library
 Group:     System Environment/Libraries
 License:   MIT
@@ -115,7 +115,7 @@ BuildRequires: ogdi-devel
 BuildRequires: perl(ExtUtils::MakeMaker)
 BuildRequires: pkgconfig
 BuildRequires: poppler-devel
-BuildRequires: postgresql94-devel
+BuildRequires: postgresql-devel
 BuildRequires: proj-devel >= 4.9.0
 BuildRequires: python2-devel
 BuildRequires: sqlite-devel
@@ -760,6 +760,9 @@ popd
 #Or as before, using ldconfig
 
 %changelog
+* Mon Apr 20 2015 Devrim Gündüz <devrim@gunduz.org> - 1.11.2-11
+- Use OS' PostgreSQL packages
+
 * Sun Mar 8 2015 Devrim Gündüz <devrim@gunduz.org> - 1.11.2-10
 - Update to 1.11.2
 - Bump release number to -10, so that we can override Fedora packages.
