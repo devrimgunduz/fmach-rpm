@@ -1,14 +1,13 @@
 Summary:	Point Data Abstraction Library
 Name:		PDAL
 Version:	0.9.9
-Release:	2%{?dist}
+Release:	3%{?dist}
 License:	BSD
-Group:		Applications/Libraries
 Source:		https://github.com/%{name}/%{name}/archive/%{version}.tar.gz
 URL:		http://www.pdal.io
-BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildRequires:	cmake boost-devel >= 1.57, proj >= 4.9.0, boost >= 1.57
-Requires:	gdal >= 1.11, libgeotiff >= 1.4.0, pcl >= 1.7.2
+BuildRequires:	hexer-devel
+Requires:	gdal >= 1.11, libgeotiff >= 1.4.0, pcl >= 1.7.2, hexer
 Requires:	points2grid >= 1.3.0, nitro >= 2.7, laszip >= 2.2.0
 
 %description
@@ -37,26 +36,27 @@ compile C or C++ applications which will directly interact with PDAL.
 
 %prep
 %setup -q
-#find . -type f -print0 | xargs -0 sed -i 's/CMAKE_INSTALL_PREFIX}\/lib/CMAKE_INSTALL_LIBDIR}/g'
 
 %build
-cmake -D CMAKE_INSTALL_PREFIX:PATH=/usr \
-	-D PDAL_LIB_INSTALL_DIR:PATH=%{_lib} \
+%cmake 	-D PDAL_LIB_INSTALL_DIR:PATH=%{_lib} \
 	-D CMAKE_INSTALL_LIBDIR:PATH=%{_lib} \
 	-D CMAKE_VERBOSE_MAKEFILE=ON  \
         -D WITH_GEOTIFF=ON \
         -D GEOTIFF_INCLUDE_DIR=%{_includedir}/libgeotiff \
-        -D WITH_LASZIP=ON .
+        -D WITH_LASZIP=ON \
+	-D PDAL_HAVE_HEXER=ON .
+
+make %{?_smp_mflags}
 
 %install
-rm -rf %{buildroot}
-make DESTDIR=%{buildroot} install
+make install/fast DESTDIR=%{buildroot}
 
-%clean
-rm -rf %{buildroot}
+%postun -p /sbin/ldconfig
+%post -p /sbin/ldconfig
 
 %files
-%defattr(-, root, root)
+%license LICENSE.txt
+%doc doc/
 %{_bindir}/pdal
 %{_bindir}/pdal-config
 %{_libdir}/libpdal_plugin_reader_pgpointcloud.so
@@ -65,14 +65,29 @@ rm -rf %{buildroot}
 %{_libdir}/libpdalcpp.so
 
 %files devel
-%defattr(-,root,root)
-%{_includedir}/pdal/*.hpp
-%{_includedir}/pdal/*.h
-%{_includedir}/pdal/plang/*.hpp
-%{_includedir}/pdal/util/*.hpp
+%{_includedir}/pdal/
+%{_includedir}/pdal/plang
+%{_includedir}/pdal/util/
 /usr/lib/pdal/cmake/PDAL*.cmake
 
 %changelog
+* Mon Apr 20 2015 Devrim GUNDUZ <devrim@gunduz.org> 0.9.9-3
+- Various updates:
+ - Build with hexer support
+ - Own directories in devel subpackage
+ - omit deprecated Group: tags and %%clean section
+ - Use better macros for make and cmake
+ - use %%{?_isa} macro in subpkg dependencies
+ - have %%build section envoke 'make'
+ - Update %%install section
+ - Improve cmake build parameters
+ - Use %%license macro
+ - Add %%doc
+ - Get rid of BuildRoot definition
+ - No need to cleanup buildroot during %%install
+ - Remove %%defattr
+ - Run ldconfig
+
 * Fri Apr 10 2015 Devrim GUNDUZ <devrim@gunduz.org> 0.9.9-2
 - Add -devel subpackage, and move related files there.
 
