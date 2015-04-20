@@ -6,6 +6,7 @@ License:	BSD and Boost
 Source:		http://download.osgeo.org/%{name}/libLAS-%{version}.tar.bz2
 URL:		http://www.liblas.org/
 BuildRequires:	cmake, libgeotiff-devel, boost-devel >= 1.53 laszip-devel
+BuildRequires:	libtiff-devel, gdal-devel
 Requires:	%{name}-libs%{?_isa} = %{version}-%{release}, laszip
 
 %description
