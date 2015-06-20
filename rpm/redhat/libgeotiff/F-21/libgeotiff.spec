@@ -1,6 +1,6 @@
 Name:		libgeotiff
 Version:	1.4.0
-Release:	3%{?dist}
+Release:	4%{?dist}
 Summary:	GeoTIFF format library
 Group:		System Environment/Libraries
 License:	MIT
@@ -105,7 +105,7 @@ echo  >> %{buildroot}%{_datadir}/epsg_csv/codes.csv
 %{_bindir}/geotifcp
 %{_bindir}/listgeo
 %{_bindir}/makegeo
-%{_libdir}/libgeotiff.so.*
+%{_libdir}/libgeotiff.so*
 %dir %{_datadir}/epsg_csv
 %attr(0644,root,root) %{_datadir}/epsg_csv/*.csv
 %{_mandir}/man1/listgeo.1.gz
@@ -118,6 +118,10 @@ echo  >> %{buildroot}%{_datadir}/epsg_csv/codes.csv
 %{_libdir}/pkgconfig/%{name}.pc
 
 %changelog
+* Thu Mar 5 2015 Devrim Gündüz <devrim@gunduz.org> - 1.4.0-4
+- Install versionless .so file, per 
+  https://github.com/devrimgunduz/fmach-rpm/issues/1
+
 * Thu Mar 5 2015 Devrim Gündüz <devrim@gunduz.org> - 1.4.0-3
 - Rebuild with new proj.
 
