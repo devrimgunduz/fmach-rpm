@@ -1,7 +1,7 @@
 Summary:	Point Data Abstraction Library
 Name:		PDAL
 Version:	0.9.9
-Release:	3%{?dist}
+Release:	4%{?dist}
 License:	BSD
 Source:		https://github.com/%{name}/%{name}/archive/%{version}.tar.gz
 URL:		http://www.pdal.io
@@ -55,6 +55,7 @@ to use PDAL
 %cmake	-D PDAL_LIB_INSTALL_DIR:PATH=%{_lib} \
 	-D CMAKE_INSTALL_LIBDIR:PATH=%{_lib} \
 	-D CMAKE_VERBOSE_MAKEFILE=ON  \
+	-D CMAKE_BUILD_TYPE=Release \
 	-D WITH_GEOTIFF=ON \
 	-D GEOTIFF_INCLUDE_DIR=%{_includedir}/libgeotiff \
 	-D WITH_LASZIP=ON \
@@ -110,6 +111,9 @@ make install/fast DESTDIR=%{buildroot}
 %{_libdir}/pdal/cmake/PDAL*.cmake
 
 %changelog
+* Sat Jun 20 2015 Devrim GUNDUZ <devrim@gunduz.org> 0.9.9-4
+- Change build type from Debug to Release
+
 * Mon Apr 20 2015 Devrim GUNDUZ <devrim@gunduz.org> 0.9.9-3
 - Various updates:
  - Build with hexer support
