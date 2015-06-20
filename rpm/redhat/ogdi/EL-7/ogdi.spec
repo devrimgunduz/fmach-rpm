@@ -5,7 +5,7 @@ Summary:        Open Geographic Datastore Interface
 Group:          Applications/Engineering
 License:        BSD
 URL:            http://ogdi.sourceforge.net/
-Source0:        http://dl.sourceforge.net/ogdi/%{name}-%{version}.beta2.tar.gz
+Source0:        http://downloads.sourceforge.net/project/%{name}/%{name}/%{version}beta2/%{name}-%{version}.beta2.tar.gz
 Source1:        http://ogdi.sourceforge.net/ogdi.pdf
 Patch0:         ogdi-3.2.0.beta2-projfix.patch
 BuildRoot:      %{_tmppath}/%{name}-%{version}-root-%(id -u -n)
