@@ -30,7 +30,7 @@ Name: boost
 Summary: The free peer-reviewed portable C++ source libraries
 Version: 1.57.0
 %define version_enc 1_57_0
-Release: 4%{?dist}
+Release: 5%{?dist}
 License: Boost and MIT and Python
 
 %define toplev_dirname %{name}_%{version_enc}
@@ -1020,6 +1020,7 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(-, root, root, -)
 %doc LICENSE_1_0.txt
 %{_libdir}/libboost_program_options.so.%{sonamever}
+%{_libdir}/libboost_program_options.so
 
 %files python
 %defattr(-, root, root, -)
@@ -1056,6 +1057,7 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(-, root, root, -)
 %doc LICENSE_1_0.txt
 %{_libdir}/libboost_thread.so.%{sonamever}
+%{_libdir}/libboost_thread.so
 
 %files timer
 %defattr(-, root, root, -)
@@ -1188,6 +1190,10 @@ rm -rf $RPM_BUILD_ROOT
 %{_mandir}/man1/bjam.1*
 
 %changelog
+* Sat Jun 20 2015 Petr Machata <pmachata@redhat.com> - 1.57.0-5
+- Install 2 more versionless .so files, per
+  https://github.com/devrimgunduz/fmach-rpm/issues/1
+
 * Wed Feb 18 2015 Petr Machata <pmachata@redhat.com> - 1.57.0-4
 - Fix template <class T> class boost::rv, which for union T's inherits
   off them.  (boost-1.57.0-move-is_class.patch)
