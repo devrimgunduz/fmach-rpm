@@ -1,14 +1,14 @@
 Summary:	Point Data Abstraction Library
 Name:		PDAL
-Version:	0.9.9
+Version:	1.0.1
 Release:	3%{?dist}
 License:	BSD
-Source:		https://github.com/%{name}/%{name}/archive/%{version}.tar.gz
+Source:		https://github.com/%{name}/%{name}/archive/pdal_%{version}.tar.gz
 URL:		http://www.pdal.io
 BuildRequires:	cmake boost-devel >= 1.57, proj >= 4.9.0, boost >= 1.57
-BuildRequires:	hexer-devel, postgresql-devel, geos-devel
+BuildRequires:	hexer-devel, postgresql-devel, geos-devel, gdal-devel, libgeotiff-devel
 BuildRequires:	pcl-devel, openni-devel, qhull-devel, zlib-devel, eigen3-devel
-BuildRequires:	python-devel
+BuildRequires:	python-devel, numpy, jsoncpp-devel, hdf5-devel, netcdf-cxx-devel
 Requires:	gdal >= 1.11, libgeotiff >= 1.4.0, pcl >= 1.7.2, hexer
 Requires:	points2grid >= 1.3.0, nitro >= 2.7, laszip >= 2.2.0
 Requires:	postgresql, geos, pcl, openni, qhull
@@ -104,12 +104,25 @@ make install/fast DESTDIR=%{buildroot}
 %{_libdir}/libpdal_plugin_reader_pcd.so
 %{_libdir}/libpdal_plugin_writer_pcd.so
 %{_libdir}/libpdal_plugin_writer_pclvisualizer.so
+%{_libdir}/libpdal_base.so
+%{_libdir}/libpdal_base.so.1
+%{_libdir}/libpdal_base.so.1.0.0
+%{_libdir}/libpdal_plang.so
+%{_libdir}/libpdal_plang.so.1
+%{_libdir}/libpdal_plang.so.1.0.0
+%{_libdir}/libpdal_util.so.1
+%{_libdir}/libpdal_util.so.1.0.0
+%{_usr}/etc/bash_completion.d/pdal
+%{_usr}/lib/pkgconfig/pdal.pc
 
 %files devel
 %{_includedir}/pdal/
 %{_libdir}/pdal/cmake/PDAL*.cmake
 
 %changelog
+* Tue Oct 13 2015 Markus Neteler <neteler@osgeo.org> 1.0.1-1
+- Update to 1.0.1, and added missing requirements
+
 * Mon Apr 20 2015 Devrim GUNDUZ <devrim@gunduz.org> 0.9.9-3
 - Various updates:
  - Build with hexer support
@@ -146,4 +159,3 @@ make install/fast DESTDIR=%{buildroot}
 
 * Tue Jan 13 2015 Devrim GUNDUZ <devrim@gunduz.org> 0.9.8-1
 - Initial packaging
-
