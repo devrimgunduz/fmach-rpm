@@ -1,6 +1,6 @@
 Summary:	Point Data Abstraction Library
 Name:		PDAL
-Version:	1.0.1
+Version:	1.0.2
 Release:	3%{?dist}
 License:	BSD
 Source:		https://github.com/%{name}/%{name}/archive/pdal_%{version}.tar.gz
@@ -55,6 +55,7 @@ to use PDAL
 %cmake	-D PDAL_LIB_INSTALL_DIR:PATH=%{_lib} \
 	-D CMAKE_INSTALL_LIBDIR:PATH=%{_lib} \
 	-D CMAKE_VERBOSE_MAKEFILE=ON  \
+	-D CMAKE_BUILD_TYPE=Release \
 	-D WITH_GEOTIFF=ON \
 	-D GEOTIFF_INCLUDE_DIR=%{_includedir}/libgeotiff \
 	-D WITH_LASZIP=ON \
@@ -120,6 +121,9 @@ make install/fast DESTDIR=%{buildroot}
 %{_libdir}/pdal/cmake/PDAL*.cmake
 
 %changelog
+* Fri Oct 16 2015 Markus Neteler <neteler@osgeo.org> 1.0.1-2
+- Force -D CMAKE_BUILD_TYPE=Release, see https://lists.osgeo.org/pipermail/pdal/2015-June/000597.html
+
 * Tue Oct 13 2015 Markus Neteler <neteler@osgeo.org> 1.0.1-1
 - Update to 1.0.1, and added missing requirements
 
