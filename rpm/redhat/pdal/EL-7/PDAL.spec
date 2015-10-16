@@ -1,15 +1,15 @@
 Summary:	Point Data Abstraction Library
 Name:		PDAL
-Version:	1.0.2
+Version:	1.0.1-2
 Release:	3%{?dist}
 License:	BSD
 Source:		https://github.com/%{name}/%{name}/archive/pdal_%{version}.tar.gz
 URL:		http://www.pdal.io
-BuildRequires:	cmake boost-devel >= 1.57, proj >= 4.9.0, boost >= 1.57
+BuildRequires:	cmake boost-devel >= 1.57, proj >= 4.9.0, boost >= 1.57, glibc-headers
 BuildRequires:	hexer-devel, postgresql-devel, geos-devel, gdal-devel, libgeotiff-devel
-BuildRequires:	pcl-devel, openni-devel, qhull-devel, zlib-devel, eigen3-devel
+BuildRequires:	pcl-devel, openni-devel, qhull-devel, zlib-devel, eigen3-devel, laszip-devel
 BuildRequires:	python-devel, numpy, jsoncpp-devel, hdf5-devel, netcdf-cxx-devel
-Requires:	gdal >= 1.11, libgeotiff >= 1.4.0, pcl >= 1.7.2, hexer
+Requires:	gdal >= 1.11, libgeotiff >= 1.4.0, pcl >= 1.7.2, hexer, laszip
 Requires:	points2grid >= 1.3.0, nitro >= 2.7, laszip >= 2.2.0
 Requires:	postgresql, geos, pcl, openni, qhull
 Requires:	zlib, eigen3
