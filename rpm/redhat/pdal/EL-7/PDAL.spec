@@ -1,16 +1,17 @@
 Summary:	Point Data Abstraction Library
 Name:		PDAL
-Version:	1.0.1-2
-Release:	3%{?dist}
+Version:	1.4.0
+Release:	1%{?dist}
 License:	BSD
-Source:		https://github.com/%{name}/%{name}/archive/pdal_%{version}.tar.gz
+Source:		https://github.com/%{name}/%{name}/archive/%{name}-%{version}.tar.gz
 URL:		http://www.pdal.io
 BuildRequires:	cmake boost-devel >= 1.57, proj >= 4.9.0, boost >= 1.57, glibc-headers
 BuildRequires:	hexer-devel, postgresql-devel, geos-devel, gdal-devel, libgeotiff-devel
 BuildRequires:	pcl-devel, openni-devel, qhull-devel, zlib-devel, eigen3-devel, laszip-devel
 BuildRequires:	python-devel, numpy, jsoncpp-devel, hdf5-devel, netcdf-cxx-devel
 Requires:	gdal >= 1.11, libgeotiff >= 1.4.0, pcl >= 1.7.2, hexer, laszip
-Requires:	points2grid >= 1.3.0, nitro >= 2.7, laszip >= 2.2.0
+Requires:	points2grid >= 1.3.0, laszip >= 2.2.0
+#Requires:	nitro >= 2.7, 
 Requires:	postgresql, geos, pcl, openni, qhull
 Requires:	zlib, eigen3
 Requires:	%{name}-libs%{?_isa} = %{version}-%{release}
@@ -66,6 +67,8 @@ to use PDAL
 	-D BUILD_PLUGIN_HEXBIN=ON \
 	-D PDAL_HAVE_LIBGEOTIFF=ON \
 	-D BUILD_PLUGIN_PCL=ON \
+	-D PDAL_HAVE_LIBXML2=ON \
+	-D PDAL_HAVE_NITRO=OFF \
 	-D POSTGRESQL_INCLUDE_DIR=%{_includedir}/pgsql \
 	-D POSTGRESQL_LIBRARIES=%{_libdir}/libpq.so \
 	-D OPENNI2_INCLUDE_DIRS:PATH=%{_includedir}/ni \
@@ -89,43 +92,21 @@ make install/fast DESTDIR=%{buildroot}
 %{_bindir}/pdal-config
 
 %files libs
-%{_libdir}/libpdal_plugin_reader_pgpointcloud.so
-%{_libdir}/libpdal_plugin_writer_pgpointcloud.so
-%{_libdir}/libpdal_util.so
+%{_libdir}/libpdal_*
 %{_libdir}/libpdalcpp.so
-%{_libdir}/libpdal_plugin_filter_ground.so
-%{_libdir}/libpdal_plugin_filter_hexbin.so
-%{_libdir}/libpdal_plugin_filter_pclblock.so
-%{_libdir}/libpdal_plugin_filter_predicate.so
-%{_libdir}/libpdal_plugin_filter_programmable.so
-%{_libdir}/libpdal_plugin_kernel_ground.so
-%{_libdir}/libpdal_plugin_kernel_pcl.so
-%{_libdir}/libpdal_plugin_kernel_smooth.so
-%{_libdir}/libpdal_plugin_kernel_view.so
-%{_libdir}/libpdal_plugin_reader_pcd.so
-%{_libdir}/libpdal_plugin_writer_pcd.so
-%{_libdir}/libpdal_plugin_writer_pclvisualizer.so
-%{_libdir}/libpdal_base.so
-%{_libdir}/libpdal_base.so.1
-%{_libdir}/libpdal_base.so.1.0.0
-%{_libdir}/libpdal_plang.so
-%{_libdir}/libpdal_plang.so.1
-%{_libdir}/libpdal_plang.so.1.0.0
-%{_libdir}/libpdal_util.so.1
-%{_libdir}/libpdal_util.so.1.0.0
-%{_usr}/etc/bash_completion.d/pdal
-%{_usr}/lib/pkgconfig/pdal.pc
+%{_libdir}/pkgconfig/pdal.pc
 
 %files devel
 %{_includedir}/pdal/
 %{_libdir}/pdal/cmake/PDAL*.cmake
 
 %changelog
-* Fri Oct 16 2015 Markus Neteler <neteler@osgeo.org> 1.0.1-2
-- Force -D CMAKE_BUILD_TYPE=Release, see https://lists.osgeo.org/pipermail/pdal/2015-June/000597.html
+* Sun Jan  8 2017 Markus Neteler <neteler@osgeo.org> 1.4.0
+- New upstream release
+- configure tweaks
 
-* Tue Oct 13 2015 Markus Neteler <neteler@osgeo.org> 1.0.1-1
-- Update to 1.0.1, and added missing requirements
+* Sat Jun 20 2015 Devrim GUNDUZ <devrim@gunduz.org> 0.9.9-4
+- Change build type from Debug to Release
 
 * Mon Apr 20 2015 Devrim GUNDUZ <devrim@gunduz.org> 0.9.9-3
 - Various updates:
@@ -163,3 +144,4 @@ make install/fast DESTDIR=%{buildroot}
 
 * Tue Jan 13 2015 Devrim GUNDUZ <devrim@gunduz.org> 0.9.8-1
 - Initial packaging
+
